@@ -3,12 +3,6 @@ require 'test/unit'
 module Coulda
   class Feature < Test::Unit::TestCase
     class << self
-      def in_order_to
-        @in_order_to
-      end
-      def as_a; @as_a; end
-      def i_want_to; @i_want_to; end
-
       def in_order_to(what)
         @in_order_to = what
       end
