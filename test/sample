@@ -1,0 +1,24 @@
+feature "feature name" do
+  in_order_to "foo"
+  as_a "bar"
+  i_want_to "blech"
+
+  def something
+  end
+
+  def expectation
+  end
+
+  scenario "pending scenario"
+
+  scenario "another scenario" do
+    given "a pending prereq"
+    when "something happens" do
+      something
+    end
+    then "expect something else" do
+      expectation
+    end
+  end
+end
+  

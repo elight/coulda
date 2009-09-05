@@ -12,10 +12,10 @@ src_files_pattern = 'src/**/*.rb'
 
 Rake::TestTask.new do |t|
   src_files = Dir[src_files_pattern]
-  src_files.each { |f| require f[0...-3] }
+  src_files.each { |f| puts f; require f[0...-3] }
   t.pattern = test_files_pattern
   t.verbose = false
 end
 
 desc 'Default: run tests.'
-task :default => ['test']
+task :default => 'test'

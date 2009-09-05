@@ -2,7 +2,8 @@ require File.join(File.dirname(__FILE__), "test_helper")
 
 class ScenarioTest < Test::Unit::TestCase
   context "A Scenario" do
-    should "have a method called 'given'"
+    should "have a method called 'given'" do
+    end
     should "have a method called 'then'"
     should "have a method called 'when'"
 
