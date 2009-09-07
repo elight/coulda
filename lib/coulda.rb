@@ -6,5 +6,6 @@ module Kernel
     f = Feature.for_name(name)
     f.class_eval(&block)
     f.assert_description
+    f
   end
 end

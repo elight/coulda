@@ -29,5 +29,8 @@ module Coulda
         end
       end
     end
+
+    # Allow scenario-less features not to fail
+    def default_test; end
   end
 end

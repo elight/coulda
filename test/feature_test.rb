@@ -1,9 +1,16 @@
 require File.join(File.dirname(__FILE__), "test_helper")
 
 class FeatureTest < Test::Unit::TestCase
+  def run_feature(feature)
+    result = Test::Unit::TestResult.new
+    p = Proc.new {}
+    feature.suite.run(result, &p)
+    result
+  end
+
   context "A Feature class" do
     should "have Test::Unit::TestCase as an ancestor" do
-      assert(Feature.ancestors.include? Test::Unit::TestCase)
+      assert(Feature.ancestors.include?(Test::Unit::TestCase))
     end
 
     context "created by name" do
@@ -12,7 +19,7 @@ class FeatureTest < Test::Unit::TestCase
       end
 
       should "be a subclass of Feature" do
-        assert(@feature.ancestors.include? Feature)
+        assert(@feature.ancestors.include?(Feature))
       end
     end
 
@@ -63,13 +70,22 @@ class FeatureTest < Test::Unit::TestCase
     end
 
     context "without scenarios" do
-      context "when loaded" do
-        should "not have any errors"
+      setup do
+        @feature_without_scenarios = feature "five" do
+          in_order_to "foo"
+          as_a "bar"
+          i_want_to "blech"
+        end
+      end
+
+      should "not have any errors when run" do
+        result = run_feature @feature_without_scenarios
+        assert(result.passed?, result.inspect)
       end
     end
 
     context "with scenarios" do
-      context "when loaded" do
+      context "when run" do
         should "create a method named 'test_<underscored_scenario_name>' method for each scenario"
       end
     end
