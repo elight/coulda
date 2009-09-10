@@ -1,6 +1,8 @@
 require File.join(File.dirname(__FILE__), "test_helper")
 
 class FeatureTest < Test::Unit::TestCase
+  include RR::Adapters::TestUnit
+
   def run_feature(feature)
     result = Test::Unit::TestResult.new
     p = Proc.new {}
@@ -84,9 +86,37 @@ class FeatureTest < Test::Unit::TestCase
       end
     end
 
-    context "with scenarios" do
-      context "when run" do
-        should "create a method named 'test_<underscored_scenario_name>' method for each scenario"
+    context "that does not have any errors" do
+      @@counter = 1
+      setup do
+        @feature_without_errors = feature @@counter.to_s do
+          in_order_to "foo"
+          as_a "bar"
+          i_want_to "blech"
+        end
+        @@counter += 1
+      end
+
+      ### Integration tests
+
+      context "with a block containing a scenario" do
+        should "create a Feature instance method named 'test_<underscored_scenario_name>'" do
+          @feature_without_errors.scenario "pending scenario"
+          assert(@feature_without_errors.instance_methods.include?("test_pending_scenario"), "Feature is missing test method from scenario")
+        end
+
+        should "create a Scenario" do
+          @feature_without_errors.scenario "pending scenario"
+        end
+
+        context "and the scenario has a block" do
+          should "validate the semantics of the scenario block"
+        end
+
+        should "include the created Scenario in the return value of the 'scenarios' method" do
+          scenario = @feature_without_errors.scenario "pending scenario"
+          assert(@feature_without_errors.scenarios.include?(scenario), "feature.scenarios doesn't contain the expected Scenario object")
+        end
       end
     end
   end

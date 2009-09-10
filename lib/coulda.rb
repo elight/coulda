@@ -2,6 +2,7 @@ module Coulda
   SyntaxError = Class.new(StandardError)
 end
 
+require 'coulda/scenario'
 require 'coulda/feature'
 
 

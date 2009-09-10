@@ -2,10 +2,15 @@ require File.join(File.dirname(__FILE__), "test_helper")
 
 class ScenarioTest < Test::Unit::TestCase
   context "A Scenario" do
-    should "have a method called 'given'" do
+    setup do
+      @scenario = Scenario.new("foobar")
     end
-    should "have a method called 'then'"
-    should "have a method called 'when'"
+
+    %w[given when then].each do |condition|
+      should "have a method called '#{condition}'" do
+        assert(@scenario.respond_to?(condition.to_sym))
+      end
+    end
 
     context "when instantiated" do
       should "not raise an error when given a String" 
