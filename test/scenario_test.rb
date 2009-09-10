@@ -58,6 +58,10 @@ class ScenarioTest < Test::Unit::TestCase
               context "but a #{stmt} does not have a block" do
                 should "declare the scenario pending"
               end
+
+              context "and the givens, whens, and thens have blocks" do
+                should "not be pending"
+              end
             end
           end
         end
