@@ -27,17 +27,7 @@ module Coulda
           raise SyntaxError.new("Must call in_order_to if as_a and/or i_wanted_to called") unless @in_order_to
           raise SyntaxError.new("Must call as_a if in_order_to and/or i_want_to called") unless @as_a
           raise SyntaxError.new("Must call i_want_to if in_order_to and/or as_a called") unless @i_want_to
-        else
-          pending!
         end
-      end
-
-      def pending!
-        @pending = true
-      end
-
-      def pending?
-        @pending
       end
 
       def scenario(name, &test_implementation)
