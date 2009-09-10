@@ -109,10 +109,6 @@ class FeatureTest < Test::Unit::TestCase
           @feature_without_errors.scenario "pending scenario"
         end
 
-        context "and the scenario has a block" do
-          should "validate the semantics of the scenario block"
-        end
-
         should "include the created Scenario in the return value of the 'scenarios' method" do
           scenario = @feature_without_errors.scenario "pending scenario"
           assert(@feature_without_errors.scenarios.include?(scenario), "feature.scenarios doesn't contain the expected Scenario object")
