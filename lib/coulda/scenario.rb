@@ -2,8 +2,9 @@ class Scenario
   attr_reader :name
 
   def initialize(name, &block)
-    @name = name
+    @name = name.to_s
     @conditions = []
+    @pending = true
   end
 
   %w[given when then].each do |condition|
@@ -12,10 +13,17 @@ class Scenario
       #block.call
     end
   end
+
+  def pending?
+    @pending
+  end
+
   def method_missing(name, *args)
     if %w[given when then].include? name
-    else 
-      raise NoMethodError.new(name)
+    else
+      raise NoMethodError.new(name.to_s)
     end
   end
+
+
 end
