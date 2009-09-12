@@ -63,10 +63,6 @@ module Coulda
       end
     HERE
   end
-
-  def pending
-    puts "implement pending"
-  end
 end
 
 
