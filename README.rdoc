@@ -1,0 +1,48 @@
+coulda
+------
+coulda gives you Cucumber-like BDD power but with an internal DSL.  This means no "call-by-regexp" and
+no Gherkin/plain-text/external DSL.  coulda is just code -- but with a Cucumber-like take on BDD.
+
+coulda, obviously was inspired by Cucumber, Shoulda, but also Thor.  coulda believes that the best way to reuse
+code is the good ol' fashioned method.  Instead of sharing files of regexps mapped to procs, you just write
+methods.  That simple.
+
+You can define the implementation of your Given/When/Then right there with the behavior description.  Or,
+if you want to reuse some Givens/Whens/Thens, just write a method!  And if you find your Feature is getting
+too bloated or that you would like to reuse Givens/Whens/Thens between features, put them in a helper.
+
+Easy as pie.
+
+  require 'rubygems'
+  require 'coulda'
+  include Coulda
+
+  Feature "feature name" do
+    in_order_to "foo"
+    as_a "bar"
+    i_want_to "blech"
+
+    def something
+    end
+
+    def expectation
+    end
+
+    Scenario "pending scenario"
+
+    Scenario "another scenario" do
+      Given "a pending prereq"
+      When "something happens" do
+        something
+      end
+      Then "expect something else" do
+        expectation
+      end
+    end
+
+    Scenario "that is live" do
+      Given "foo" do; end
+      When "bar" do; end
+      Then "blech" do; end
+    end
+  end
