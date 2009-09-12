@@ -1,16 +1,27 @@
 require 'rake'
 
 Gem::Specification.new do |s|
-  s.name = %q{coulda}
-  s.version = "0.1.0"
-  s.date = %q{2009-09-11}
-  s.authors = ["Evan Light"]
-  s.email = %q{evan@tiggerpalace.com}
-  s.summary = %q{Behaviour Driven Development with less tooling instead of more}
-  s.homepage = %q{http://evan.tiggerpalace.com/}
-  s.description = %q{Behaviour Driven Development with less tooling instead of more}
-  s.description = %q{ParseConfig provides simple parsing of standard *nix style config files.}
-  s.files = [ "README.rdoc", "LICENSE", Array(FileList.new("lib/**/**")), Array(FileList.new("test/**"))].flatten
+  s.name = "coulda"
+  s.version = "0.1.1"
+  s.date = "2009-09-12"
+  s.authors = ["Evan David Light"]
+  s.email = "evan@tiggerpalace.com"
+  s.summary = "Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse"
+  s.homepage = "http://evan.tiggerpalace.com/"
+  s.description = "Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse"
   s.add_dependency 'jeremymcanally-pending', '>= 0.1'
+  s.files = [ 
+    "README.rdoc", 
+    "LICENSE", 
+    "HISTORY",
+    "lib/coulda.rb",
+    "lib/coulda/scenario.rb",
+    "lib/coulda/feature.rb"
+  ]
+  s.test_files = [
+    "test/test_helper.rb",
+    "test/feature_test.rb",
+    "test/scenario_test.rb"
+  ]
 end
 
