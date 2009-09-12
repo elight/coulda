@@ -2,7 +2,9 @@ module Coulda
   SyntaxError = Class.new(StandardError)
 end
 
+gem 'jeremymcanally-pending', '>= 0.1'
 require 'pending'
+
 require 'coulda/feature'
 require 'coulda/scenario'
 
