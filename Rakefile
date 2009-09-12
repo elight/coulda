@@ -17,5 +17,21 @@ Rake::TestTask.new do |t|
   t.verbose = false
 end
 
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |s|
+    s.name = "coulda"
+    s.version = "0.1.1"
+    s.authors = ["Evan David Light"]
+    s.email = "evan@tiggerpalace.com"
+    s.summary = "Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse"
+    s.homepage = "http://evan.tiggerpalace.com/"
+    s.description = "Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse"
+  end
+rescue LoadError
+  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+end
+
+
 desc 'Default: run tests.'
 task :default => 'test'
