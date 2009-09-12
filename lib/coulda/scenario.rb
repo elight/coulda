@@ -18,7 +18,9 @@ module Coulda
         def #{statement}(name, &block)
           if @validating_semantics
             @statements << stmt = Statement.new(:#{statement}, name, block)
-          elsif !pending? && block
+          elsif pending? 
+            # TODO
+          elseif
             block.call
           end
         end
