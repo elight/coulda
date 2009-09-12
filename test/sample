@@ -1,4 +1,4 @@
-feature "feature name" do
+Feature "feature name" do
   in_order_to "foo"
   as_a "bar"
   i_want_to "blech"
@@ -9,14 +9,14 @@ feature "feature name" do
   def expectation
   end
 
-  scenario "pending scenario"
+  Scenario "pending scenario"
 
-  scenario "another scenario" do
-    given "a pending prereq"
-    when "something happens" do
+  Scenario "another scenario" do
+    Given "a pending prereq"
+    When "something happens" do
       something
     end
-    then "expect something else" do
+    Then "expect something else" do
       expectation
     end
   end

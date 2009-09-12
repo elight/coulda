@@ -7,7 +7,7 @@ require 'coulda/feature'
 
 
 module Kernel
-  def feature(name, &block)
+  def Feature(name, &block)
     f = Feature.for_name(name)
     f.class_eval(&block)
     f.assert_description

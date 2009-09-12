@@ -30,7 +30,7 @@ module Coulda
         end
       end
 
-      def scenario(name, &test_implementation)
+      def Scenario(name, &test_implementation)
         raise SyntaxError.new("A scenario requires a name") unless name
         method_name = "test_#{name.sub(/\s/, "_").downcase}"
         @scenarios ||= []

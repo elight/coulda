@@ -54,32 +54,80 @@ class ScenarioTest < Test::Unit::TestCase
 
           context "and all givens occur before all whens" do
             context "and all whens occur before all thens" do
-              should "not raise an error"
+              should "not raise an error" do
+                assert_nothing_raised do
+                  Scenario.new "foo" do
+                    Given "bar"
+                    When "blech"
+                    Then "baz"
+                  end
+                end
+              end
             end
 
             context "and all whens do not occur before all thens" do
-              should "raise a DSL syntax error"
+              should "raise a DSL syntax error" do
+                assert_raises Coulda::SyntaxError do
+                  Scenario.new "foo" do
+                    Given "bar"
+                    When "blech"
+                    Then "baz"
+                    When "foobarblech"
+                  end
+                end
+              end
             end
           end
 
           context "where not all givens occur before all whens" do
             context "and all whens occur before all thens" do
-              should "raise a DSL syntax error"
+              should "raise a DSL syntax error" do
+                assert_raises Coulda::SyntaxError do
+                  Scenario.new "foo" do
+                    Given "bar"
+                    When "blech"
+                    Given "foobarblech"
+                    Then "baz"
+                  end
+                end
+              end
             end
 
             context "and all whens do not occur before all thens" do
-              should "raise a DSL syntax error"
+              should "raise a DSL syntax error" do
+                assert_raises Coulda::SyntaxError do
+                  Scenario.new "foo" do
+                    Given "bar"
+                    When "blech"
+                    Given "barblech"
+                    Then "baz"
+                    When "foobarblech"
+                  end
+                end
+              end
             end
           end
 
           context "where givens, whens, are present and in the correct order" do
-            %w[Given When Then].each do |stmt|
-              context "but a #{stmt} does not have a block" do
-                should "declare the scenario pending"
+            context "but a Given does not have a block" do
+              should "declare the scenario pending" do
+                scenario = Scenario.new "foo" do
+                  Given "bar" 
+                  When "blech" do; end
+                  Then "baz" do; end
+                end
+                assert(scenario.pending?)
               end
+            end
 
-              context "and the givens, whens, and thens have blocks" do
-                should "not be pending"
+            context "and the givens, whens, and thens have blocks" do
+              should "not be pending" do
+                scenario = Scenario.new "foo" do
+                  Given "bar" do; end
+                  When "blech" do; end
+                  Then "baz" do; end
+                end
+                assert(!scenario.pending?)
               end
             end
           end
