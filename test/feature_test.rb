@@ -1,8 +1,6 @@
 require File.join(File.dirname(__FILE__), "test_helper")
 
 class FeatureTest < Test::Unit::TestCase
-  include RR::Adapters::TestUnit
-
   def run_feature(feature)
     result = Test::Unit::TestResult.new
     p = Proc.new {}
