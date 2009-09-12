@@ -35,8 +35,10 @@ module Coulda
         method_name = "test_#{name.sub(/\s/, "_").downcase}"
         @scenarios ||= []
         @scenarios << scenario = Scenario.new(name, &test_implementation)
-        define_method(method_name) do
-          test_implementation.call
+        if scenario.pending?
+          define_method(method_name) { pending }
+        else
+          define_method(method_name, &test_implementation)
         end
         scenario
       end
@@ -44,9 +46,27 @@ module Coulda
       def scenarios
         @scenarios ||= []
       end
+
+      def pending?
+        @scenarios.all? { |s| !s.pending? }
+      end
     end
 
     # Allow scenario-less features not to fail
     def default_test; end
   end
+
+  %w[Given When Then].each do |statement|
+    eval <<-HERE
+      def #{statement}(name, &block)
+        block.call
+      end
+    HERE
+  end
+
+  def pending
+    puts "implement pending"
+  end
 end
+
+

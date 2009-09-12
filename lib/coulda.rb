@@ -2,9 +2,8 @@ module Coulda
   SyntaxError = Class.new(StandardError)
 end
 
-require 'coulda/scenario'
 require 'coulda/feature'
-
+require 'coulda/scenario'
 
 module Kernel
   def Feature(name, &block)
