@@ -5,3 +5,7 @@ Initial release with basic features to generate tests from internal DSL
 0.1.1
 -----
 Corrections for github gem build process
+
+0.1.2
+-----
+Added support for Ruby 1.9.1
