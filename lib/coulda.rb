@@ -2,6 +2,9 @@ module Coulda
   SyntaxError = Class.new(StandardError)
 end
 
+
+require 'test/unit'
+
 gem 'jeremymcanally-pending', '>= 0.1'
 require 'pending'
 

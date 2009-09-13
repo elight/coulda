@@ -1,5 +1,3 @@
-require 'test/unit'
-
 module Coulda
   class Feature < Test::Unit::TestCase
     class << self

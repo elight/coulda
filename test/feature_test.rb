@@ -2,9 +2,14 @@ require File.join(File.dirname(__FILE__), "test_helper")
 
 class FeatureTest < Test::Unit::TestCase
   def run_feature(feature)
-    result = Test::Unit::TestResult.new
-    p = Proc.new {}
-    feature.suite.run(result, &p)
+    if Object::RUBY_VERSION =~ /^1.9/
+      result = MiniTest::Unit.autorun
+    else 
+      # Assume 1.8.x
+      result = Test::Unit::TestResult.new
+      p = Proc.new {}
+      feature.suite.run(result, &p)
+    end
     result
   end
 
@@ -80,7 +85,7 @@ class FeatureTest < Test::Unit::TestCase
 
       should "not have any errors when run" do
         result = run_feature @feature_without_scenarios
-        assert(result.passed?, result.inspect)
+        Object::RUBY_VERSION =~ /^1.9/ ?  assert(result.inspect) : assert(result)
       end
     end
 
@@ -100,6 +105,7 @@ class FeatureTest < Test::Unit::TestCase
       context "with a block containing a scenario" do
         should "create a Feature instance method named 'test_<underscored_scenario_name>'" do
           @feature_without_errors.Scenario "pending scenario"
+          puts @feature_without_errors.instance_methods.include?("test_pending_scenario").sort - 42.methods
           assert(@feature_without_errors.instance_methods.include?("test_pending_scenario"), "Feature is missing test method from scenario")
         end
 

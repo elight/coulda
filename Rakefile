@@ -4,6 +4,7 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'rake/gempackagetask'
 
+gem 'thoughtbot-shoulda'
 require 'shoulda'
 
 # Test::Unit::UI::VERBOSE
