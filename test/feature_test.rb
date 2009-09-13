@@ -105,8 +105,9 @@ class FeatureTest < Test::Unit::TestCase
       context "with a block containing a scenario" do
         should "create a Feature instance method named 'test_<underscored_scenario_name>'" do
           @feature_without_errors.Scenario "pending scenario"
-          puts @feature_without_errors.instance_methods.include?("test_pending_scenario").sort - 42.methods
-          assert(@feature_without_errors.instance_methods.include?("test_pending_scenario"), "Feature is missing test method from scenario")
+          test_name = "test_pending_scenario"
+          test_name = :test_pending_scenario if RUBY_VERSION =~ /^1.9/
+          assert(@feature_without_errors.instance_methods.include?(test_name), "Feature is missing test method from scenario")
         end
 
         should "create a Scenario" do
