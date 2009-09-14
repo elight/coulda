@@ -1,0 +1,7 @@
+--- 
+#install required gems for coulda
+defaults:
+  install_options: --include-dependencies --no-ri --no-rdoc
+gems: 
+- name: thoughtbot-shoulda 
+  install_options: --source http://gems.github.com
