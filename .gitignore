@@ -1,2 +1,3 @@
 coulda*.gem
 coverage/*
+.devver/devver_opts.yml
