@@ -5,3 +5,6 @@ defaults:
 gems: 
 - name: thoughtbot-shoulda 
   install_options: --source http://gems.github.com
+- name: technicalpickles-jeweler
+  install_options: --source http://gems.github.com
+
