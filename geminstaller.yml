@@ -3,8 +3,9 @@
 defaults:
   install_options: --include-dependencies --no-ri --no-rdoc
 gems: 
+- name: jeremymcanally-pending
+  install_options: --source http://gems.github.com
 - name: thoughtbot-shoulda 
   install_options: --source http://gems.github.com
 - name: technicalpickles-jeweler
   install_options: --source http://gems.github.com
-
