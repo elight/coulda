@@ -5,6 +5,8 @@ defaults:
 gems: 
 - name: bones
   version: 2.1.1
+- name: git 
+  version: 1.2.1
 - name: jeremymcanally-pending
   install_options: --source http://gems.github.com
 - name: thoughtbot-shoulda 
