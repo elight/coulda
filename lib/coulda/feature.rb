@@ -50,8 +50,10 @@ module Coulda
       end
     end
 
-    # Allow scenario-less features not to fail
-    def default_test; end
+    # Scenario-less features should be pending
+    def default_test
+      pending
+    end
   end
 
   %w[Given When Then].each do |statement|
