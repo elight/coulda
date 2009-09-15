@@ -41,3 +41,6 @@ gem install technicalpickles-jeweler -s http://gems.github.com
 geminstaller
 
 geminstaller -c geminstaller.yml
+
+echo "this is an error"
+exit 1
