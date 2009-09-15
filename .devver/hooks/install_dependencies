@@ -18,6 +18,9 @@ if [ -e $rails_env_file ]; then
   fi
 fi
 
+echo "this is an error"
+exit 1
+
 # The following command installs gem dependencies specified in a Ruby on Rails
 # environment.rb file
 #rake_file="Rakefile"
