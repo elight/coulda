@@ -33,3 +33,4 @@ fi
 #
 geminstaller
 
+geminstaller -c geminstaller.yml
