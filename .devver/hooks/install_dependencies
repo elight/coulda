@@ -42,5 +42,5 @@ geminstaller
 
 geminstaller -c geminstaller.yml
 
-echo "this is an error"
-exit 1
+#echo "this is an error"
+#exit 1
