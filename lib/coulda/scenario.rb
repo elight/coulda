@@ -10,17 +10,12 @@ module Coulda
       @statements = []
       check_statements
       @pending = @statements.empty? || @statements.any? { |s| s.block.nil? }
-      @last_stmt_type = nil
     end
 
     %w[Given When Then].each do |statement|
       eval <<-HERE
         def #{statement}(name, &block)
-          if @validating_semantics
-            @statements << stmt = Statement.new(:#{statement}, name, block)
-          else
-            block.call
-          end
+          @statements << stmt = Statement.new(:#{statement}, name, block)
         end
       HERE
     end
@@ -32,13 +27,10 @@ module Coulda
     private
 
     def check_statements
-      @validating_semantics = true
       if @block
         instance_eval &@block
         assert_statements
       end
-      @validating_semantics = false
-      
     end
 
     def assert_statements
