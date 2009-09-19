@@ -73,7 +73,7 @@ class FeatureTest < Test::Unit::TestCase
 
       should "not have any errors when run" do
         result = run_feature @feature_without_scenarios
-        Object::RUBY_VERSION =~ /^1.9/ ?  assert(result.inspect) : assert(result)
+        Object::RUBY_VERSION =~ /^1.9/ ? assert(result.pass?) : assert(result)
       end
     end
 
