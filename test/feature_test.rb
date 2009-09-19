@@ -1,18 +1,6 @@
 require File.join(File.dirname(__FILE__), "test_helper")
 
 class FeatureTest < Test::Unit::TestCase
-  def run_feature(feature)
-    if Object::RUBY_VERSION =~ /^1.9/
-      result = MiniTest::Unit.autorun
-    else 
-      # Assume 1.8.x
-      result = Test::Unit::TestResult.new
-      p = Proc.new {}
-      feature.suite.run(result, &p)
-    end
-    result
-  end
-
   context "A Feature class" do
     should "have Test::Unit::TestCase as an ancestor" do
       assert(Feature.ancestors.include?(Test::Unit::TestCase))

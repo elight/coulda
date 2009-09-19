@@ -32,12 +32,14 @@ module Coulda
         raise SyntaxError.new("A scenario requires a name") unless name
         method_name = "test_#{name.sub(/\s/, "_").downcase}"
         @scenarios ||= []
-        @scenarios << scenario = Scenario.new(name, &test_implementation)
-        if scenario.pending?
-          define_method(method_name) { pending }
-        else
+        if block_given?
+          scenario = Scenario.new(name, &test_implementation)
           define_method(method_name, &test_implementation)
+        else
+          scenario = Scenario.new(name)
+          define_method(method_name) { pending }
         end
+        @scenarios << scenario
         scenario
       end
 
@@ -59,7 +61,7 @@ module Coulda
   %w[Given When Then].each do |statement|
     eval <<-HERE
       def #{statement}(name, &block)
-        block.call
+        block.call if block_given?
       end
     HERE
   end
