@@ -6,10 +6,14 @@ class Issue1Test < Test::Unit::TestCase
     setup do
       pendings_are_errors
 
-      @feature_without_errors = Feature "Issue 1 feature" do
+      module GivenSomething
         def given_something
           Given "something" do; end
         end
+      end
+
+      @feature_without_errors = Feature "Issue 1 feature" do
+        include GivenSomething
 
         in_order_to "foo"
         as_a "bar"
