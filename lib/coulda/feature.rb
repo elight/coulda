@@ -30,17 +30,8 @@ module Coulda
 
       def Scenario(name, &test_implementation)
         raise SyntaxError.new("A scenario requires a name") unless name
-        method_name = "test_#{name.sub(/\s/, "_").downcase}"
-        @scenarios ||= []
-        if block_given?
-          scenario = Scenario.new(name, &test_implementation)
-          define_method(method_name, &test_implementation)
-        else
-          scenario = Scenario.new(name)
-          define_method(method_name) { pending }
-        end
-        @scenarios << scenario
-        scenario
+        create_test_method_for(name, &test_implementation)
+        create_scenario_for(name, &test_implementation)
       end
 
       def scenarios
@@ -49,6 +40,29 @@ module Coulda
 
       def pending?
         @scenarios.all? { |s| !s.pending? }
+      end
+
+      private
+
+      def create_test_method_for(name, &test_implementation)
+        method_name = "test_#{name.sub(/\s+/, "_").downcase}"
+        @scenarios ||= []
+        if block_given?
+          define_method(method_name, &test_implementation)
+        else
+          define_method(method_name) { pending }
+        end
+      end
+
+      def create_scenario_for(name, &test_implementation)
+        @scenarios ||= []
+        if block_given?
+          scenario = Scenario.new(name, &test_implementation)
+        else
+          scenario = Scenario.new(name)
+        end
+        @scenarios << scenario
+        scenario
       end
     end
 
