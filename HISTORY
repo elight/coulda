@@ -9,3 +9,9 @@ Corrections for github gem build process
 0.1.2 && 0.1.3
 --------------
 Cleanup
+
+0.2.0
+-----
+- Fixed issue 1 which prevented "extract method" on calls to Given/When/Then
+  - Refactored Feature and Scenario accordingly assigning more responsibility to Feature
+- No longer enforcing order/presence of Given/When/Then within Scenarios
