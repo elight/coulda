@@ -28,7 +28,7 @@
 ################################################################################
 require 'net/smtp'
 require 'time'
-to              = "danmayer@gmail.com"
+to              = "sleight42@gmail.com"
 
 success         = ARGV[0].to_i == 0
 recipient       = ENV.fetch('NOTIFY_RECIPIENT'){to}

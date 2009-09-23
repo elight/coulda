@@ -35,9 +35,6 @@ fi
 # more about the geminstaller file format.
 #
 
-gem install jeremymcanally-pending -s http://gems.github.com
-gem install technicalpickles-jeweler -s http://gems.github.com
-
 geminstaller
 
 geminstaller -c geminstaller.yml

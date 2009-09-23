@@ -4,3 +4,11 @@ I, [2009-09-14T09:55:27.878634 #44700]  INFO -- : Requesting project_id nil
 I, [2009-09-14T21:02:00.525694 #49817]  INFO -- : client force_sync true and force_reload false
 I, [2009-09-14T21:02:00.534971 #49817]  INFO -- : client force_sync true and force_reload false
 I, [2009-09-14T21:02:00.544318 #49817]  INFO -- : Requesting project_id nil
+I, [2009-09-23T16:56:04.530416 #11527]  INFO -- : client force_sync true and force_reload false
+I, [2009-09-23T16:56:04.530938 #11527]  INFO -- : client force_sync true and force_reload false
+I, [2009-09-23T16:56:04.586595 #11527]  INFO -- : Requesting project_id 9904640369
+E, [2009-09-23T16:56:04.999524 #11527] ERROR -- : That project ID is not valid for this user.
+Check that the API key in .devver/devver_opts.yml is correct or delete .devver/project_id to get a new project ID
+I, [2009-09-23T16:57:12.063786 #11540]  INFO -- : client force_sync true and force_reload false
+I, [2009-09-23T16:57:12.064336 #11540]  INFO -- : client force_sync true and force_reload false
+I, [2009-09-23T16:57:12.074837 #11540]  INFO -- : Requesting project_id nil
