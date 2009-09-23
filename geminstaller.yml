@@ -1,0 +1,15 @@
+--- 
+#install required gems for coulda
+defaults:
+  install_options: --include-dependencies --no-ri --no-rdoc
+gems: 
+- name: bones
+  version: 2.1.1
+- name: git 
+  version: 1.2.1
+- name: jeremymcanally-pending
+  install_options: --source http://gems.github.com
+- name: thoughtbot-shoulda 
+  install_options: --source http://gems.github.com
+- name: technicalpickles-jeweler
+  install_options: --source http://gems.github.com

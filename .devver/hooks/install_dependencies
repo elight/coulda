@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# This hook handles gem dependency installation for projects on Devver.  See
+# http://support.devver.net/faqs/compatibility/gems for more information.
+
+# Rails' gems:install task has a chicken/egg problem: the Rakefile won't run
+# unless the Rails gems are already available.  So we need to make sure they are
+# installed BEFORE running 'rake gems:install RAILS_ENV=test'
+rails_env_file="config/environment.rb"
+if [ -e $rails_env_file ]; then
+  rails_version=`grep RAILS_GEM_VERSION $rails_env_file | egrep -o "[0-9]+\.[0-9]+\.[0-9]+"`
+  if [ -n "$rails_version" ]; then
+    echo "Ensuring Rails gems are installed"
+    if [ `gem list -i rails -v $rails_version` = "false" ]; then
+      echo "Installing Rails version $rails_version"
+      gem install -v $rails_version rails --no-ri --no-rdoc
+    fi
+  fi
+fi
+
+#echo "this is an error"
+#exit 1
+
+# The following command installs gem dependencies specified in a Ruby on Rails
+# environment.rb file
+#rake_file="Rakefile"
+#if [ -e $rake_file ]; then
+#    rake gems:install RAILS_ENV=test
+#fi
+
+# If your project is not a Rails project or if you don't use Rails gem
+# dependencies, you may want to comment out the line above and uncomment the
+# following line.  This line will call geminstaller, which looks for a
+# geminstaller.yml or config/geminstaller.yml.  See http://geminstaller.org for
+# more about the geminstaller file format.
+#
+
+gem install jeremymcanally-pending -s http://gems.github.com
+gem install technicalpickles-jeweler -s http://gems.github.com
+
+geminstaller
+
+geminstaller -c geminstaller.yml
+
+#echo "this is an error"
+#exit 1

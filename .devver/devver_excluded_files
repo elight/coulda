@@ -1,0 +1,13 @@
+**/.svn
+**/.git
+tmp
+log
+**/#*
+**/*_flymake.rb
+.devver/*.log
+.devver/devver_cached_tests.yml
+.devver/devver_excluded_files
+.devver/devver_sync_time.yml
+.devver/included_list
+.devver/project_id
+**/.gitignore
