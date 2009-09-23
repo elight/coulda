@@ -1,0 +1,22 @@
+# Use this GemInstaller file to install any gems that are required to load
+# your Rakefile, config/environment.rb, or config/environments/test.rb
+#
+# To use this file, run:
+# mv .devver/devver_geminstaller.yml.example .devver/devver_geminstaller.yml
+#
+--- 
+defaults:
+  install_options: --include-dependencies --no-rdoc --no-ri
+gems: 
+# Here are some examples of how to declare your gems. For more information,
+# visit http://geminstaller.rubyforge.org/documentation/documentation.html#config_file
+#- name: mocha
+#  version: 0.9.5
+#- name: uuidtools
+#  version: 2.0.0
+#- name: mockfs 
+#  version: 0.1.6
+#- name: pauldix-feedzirra
+#  version: 0.0.17
+#  install_options: --source http://gems.github.com
+
