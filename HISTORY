@@ -15,3 +15,9 @@ Cleanup
 - Fixed issue 1 which prevented "extract method" on calls to Given/When/Then
   - Refactored Feature and Scenario accordingly assigning more responsibility to Feature
 - No longer enforcing order/presence of Given/When/Then within Scenarios
+
+0.3.0
+-----
+- Adds coulda:print_features task, providing plain text output in a 
+  form similar to Cucumber's Gherkin
+- Added hooks for Devver's continuous integration API

@@ -4,6 +4,8 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'rake/gempackagetask'
 
+require 'lib/coulda/tasks'
+
 gem 'thoughtbot-shoulda'
 require 'shoulda'
 

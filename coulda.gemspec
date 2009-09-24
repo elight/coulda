@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{coulda}
-  s.version = "0.2.0"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Evan David Light"]
-  s.date = %q{2009-09-12}
+  s.date = %q{2009-09-23}
   s.description = %q{Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse}
   s.email = %q{evan@tiggerpalace.com}
   s.extra_rdoc_files = [
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
      "README.rdoc"
   ]
   s.files = [
-    ".gitignore",
+     ".gitignore",
      "HISTORY",
      "LICENSE",
      "README.rdoc",
@@ -25,20 +25,26 @@ Gem::Specification.new do |s|
      "VERSION",
      "coulda.gemspec",
      "example/sample.rb",
+     "geminstaller.yml",
      "lib/coulda.rb",
      "lib/coulda/feature.rb",
      "lib/coulda/scenario.rb",
+     "lib/coulda/tasks.rb",
      "test/feature_test.rb",
+     "test/integration/using_coulda_test.rb",
+     "test/regression/issue_1_test.rb",
      "test/scenario_test.rb",
      "test/test_helper.rb"
   ]
   s.homepage = %q{http://evan.tiggerpalace.com/}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.4}
+  s.rubygems_version = %q{1.3.5}
   s.summary = %q{Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse}
   s.test_files = [
     "test/feature_test.rb",
+     "test/integration/using_coulda_test.rb",
+     "test/regression/issue_1_test.rb",
      "test/scenario_test.rb",
      "test/test_helper.rb"
   ]
