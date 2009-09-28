@@ -1,4 +1,17 @@
 module Coulda
+  Statement = Struct.new(:type, :name, :block)
+
+  module FeatureBehavior
+    %w[Given When Then].each do |statement|
+      eval <<-HERE
+        def #{statement}(name, &block)
+          @pending = true unless block_given?
+          @statements << stmt = Statement.new(:#{statement}, name, block)
+        end
+      HERE
+    end
+  end
+
   class Feature < Test::Unit::TestCase
     class << self
       attr_accessor :description
@@ -23,6 +36,7 @@ module Coulda
 
       def for_name(name)
         klass = Class.new(Feature)
+        klass.extend(FeatureBehavior)
         klass.description = name
         class_name = feature_name_from(name)
         Object.const_set(class_name, klass)
@@ -82,10 +96,8 @@ module Coulda
 
       def extract_statements_from(&test_implementation)
         @statements ||= []
-        @extracting_metadata = true
         self.instance_eval(&test_implementation)
         statements = @statements
-        @extracting_metadata = false
         @statements = []
         statements
       end
@@ -95,20 +107,13 @@ module Coulda
     def default_test
       pending
     end
-  end
 
-  Statement = Struct.new(:type, :name, :block)
-
-  %w[Given When Then].each do |statement|
-    eval <<-HERE
-      def #{statement}(name, &block)
-        if @extracting_metadata
-          @pending = true unless block_given?
-          @statements << stmt = Statement.new(:#{statement}, name, block)
-        else
+    %w[Given When Then].each do |statement|
+      eval <<-HERE
+        def #{statement}(name, &block)
           yield if block_given?
         end
-      end
-    HERE
+      HERE
+    end
   end
 end

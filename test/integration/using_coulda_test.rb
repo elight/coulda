@@ -6,7 +6,6 @@ Feature "Using Coulda" do
   i_want_to "have typical Coulda usage work"
 
   def prove_methods_from_then_invokes_method_on_feature
-    # this was invoked
     assert true
   end
 
@@ -17,8 +16,8 @@ Feature "Using Coulda" do
   end
 
   Scenario "A scenario without a When" do
-    Given "this scenario" do; end
-    Then "should pass" do
+    Given "a scenario calling a Feature instance method" do; end
+    Then "should pass if the method does not fail/error" do
       prove_methods_from_then_invokes_method_on_feature
     end
   end

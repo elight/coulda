@@ -1,21 +1,43 @@
 require File.join(File.dirname(__FILE__), "test_helper")
 
 class FeatureTest < Test::Unit::TestCase
+  context "A Feature instance" do
+    @@counter = 1
+    setup do
+      feature_class = Feature.for_name "foobarblech#{@@counter}"
+      @@counter += 1
+      @feature = feature_class.new("default_test")
+    end
+
+    %w[Given When Then].each do |condition|
+      should "have a method called '#{condition}'" do
+        assert(@feature.respond_to?(condition))
+      end
+    end
+  end
+
   context "A Feature class" do
     should "have Test::Unit::TestCase as an ancestor" do
       assert(Feature.ancestors.include?(Test::Unit::TestCase))
     end
 
     context "created by name" do
+      @@counter = 1
       setup do 
-        @feature = Feature.for_name "foo"
+        @feature = Feature.for_name "foo#{@@counter}"
+        @@counter += 1
       end
 
       should "be a subclass of Feature" do
         assert(@feature.ancestors.include?(Feature))
       end
+      
+      %w[Given When Then].each do |condition|
+        should "have a method called '#{condition}'" do
+          assert(@feature.respond_to?(condition), "does not have a method called #{condition}")
+        end
+      end
     end
-
 
     context "that calls in_order_to, as_a, and i_want_to" do
       should "not raise syntax error" do
