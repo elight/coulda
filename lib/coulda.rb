@@ -14,7 +14,7 @@ require 'coulda/scenario'
 module Kernel
   def Feature(name, &block)
     f = Feature.for_name(name)
-    f.class_eval(&block)
+    f.class_eval(&block) if block_given?
     f.assert_description
     f
   end
