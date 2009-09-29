@@ -30,9 +30,9 @@ namespace :coulda do
       next unless feature.ancestors.include?(Feature)
 
       puts "Feature: #{feature.description}"
-      puts "  In order to #{feature.in_order_to}"
-      puts "  As a #{feature.as_a}"
-      puts "  I want to #{feature.i_want_to}"
+      puts "  In order to #{feature.in_order_to}" if feature.in_order_to
+      puts "  As a #{feature.as_a}" if feature.as_a
+      puts "  I want to #{feature.i_want_to}" if feature.i_want_to
       feature.scenarios.each do |scenario|
         puts
         puts "  Scenario: #{scenario.name} #{scenario.pending? ? '(pending)' : ''}"
