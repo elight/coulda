@@ -27,4 +27,13 @@ Feature "Using Coulda" do
     When "no events" do; end
     Then "should pass" do; end
   end
+
+  Scenario "A scenario with a lot of Ands" do
+    Given "no prerequisites" do; end
+    And "some more lack of prerequisites" do; end
+    When "something doesn't happen" do; end
+    And "something else doesn't happen" do; end
+    Then "something else" do; end
+    And "the final thing" do; end
+  end
 end

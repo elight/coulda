@@ -2,7 +2,7 @@ module Coulda
   Statement = Struct.new(:type, :name, :block)
 
   module FeatureBehavior
-    %w[Given When Then].each do |statement|
+    %w[Given When Then And].each do |statement|
       eval <<-HERE
         def #{statement}(name, &block)
           @pending = true unless block_given?
@@ -108,7 +108,7 @@ module Coulda
       pending
     end
 
-    %w[Given When Then].each do |statement|
+    %w[Given When Then And].each do |statement|
       eval <<-HERE
         def #{statement}(name, &block)
           yield if block_given?

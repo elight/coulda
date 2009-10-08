@@ -9,7 +9,7 @@ class FeatureTest < Test::Unit::TestCase
       @feature = feature_class.new("default_test")
     end
 
-    %w[Given When Then].each do |condition|
+    %w[Given When Then And].each do |condition|
       should "have a method called '#{condition}'" do
         assert(@feature.respond_to?(condition))
       end
@@ -32,7 +32,7 @@ class FeatureTest < Test::Unit::TestCase
         assert(@feature.ancestors.include?(Feature))
       end
       
-      %w[Given When Then].each do |condition|
+      %w[Given When Then And].each do |condition|
         should "have a method called '#{condition}'" do
           assert(@feature.respond_to?(condition), "does not have a method called #{condition}")
         end
