@@ -34,6 +34,6 @@ Feature "Using Coulda" do
     When "something doesn't happen" do; end
     And "something else doesn't happen" do; end
     Then "something else" do; end
-    And "the final thing" do; end
+    And "should pass" do; end
   end
 end
