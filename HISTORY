@@ -21,3 +21,9 @@ Cleanup
 - Adds coulda:print_features task, providing plain text output in a 
   form similar to Cucumber's Gherkin
 - Added hooks for Devver's continuous integration API
+
+0.3.1
+-----
+- Minor refactorings
+- Added more examples
+- Adds "And" support to Given, When, and Then
