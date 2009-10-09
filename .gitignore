@@ -1,4 +1,4 @@
 coulda*.gem
 coverage/*
 .devver/devver_opts.yml
-.devver/*log
+.devver/*.log
