@@ -13,7 +13,7 @@ class Issue1Test < Test::Unit::TestCase
       pendings_are_errors
 
       @feature_without_errors = Feature "Issue 1 feature" do
-        include GivenSomething
+        extend GivenSomething
 
         in_order_to "foo"
         as_a "bar"
@@ -28,7 +28,7 @@ class Issue1Test < Test::Unit::TestCase
     end
 
     should "pass" do
-      assert(run_feature(@feature_without_errors))
+      assert(run_feature(@feature_without_errors.tests.first))
     end
   end
 end

@@ -1,41 +1,23 @@
 require File.join(File.dirname(__FILE__), "test_helper")
 
 class FeatureTest < Test::Unit::TestCase
-  context "A Feature instance" do
-    @@counter = 1
+  context "A Feature" do
     setup do
-      feature_class = Feature.for_name "foobarblech#{@@counter}"
-      @@counter += 1
-      @feature = feature_class.new("default_test")
+      @feature = Feature "foobarblech#{@@counter}" do
+        Scenario "" do
+          Given "" do; end
+          Then "" do; end
+        end
+      end
+    end
+
+    should "contain tests" do
+      assert(@feature.tests.first)
     end
 
     %w[Given When Then And].each do |condition|
       should "have a method called '#{condition}'" do
         assert(@feature.respond_to?(condition))
-      end
-    end
-  end
-
-  context "A Feature class" do
-    should "have Test::Unit::TestCase as an ancestor" do
-      assert(Feature.ancestors.include?(Test::Unit::TestCase))
-    end
-
-    context "created by name" do
-      @@counter = 1
-      setup do 
-        @feature = Feature.for_name "foo#{@@counter}"
-        @@counter += 1
-      end
-
-      should "be a subclass of Feature" do
-        assert(@feature.ancestors.include?(Feature))
-      end
-      
-      %w[Given When Then And].each do |condition|
-        should "have a method called '#{condition}'" do
-          assert(@feature.respond_to?(condition), "does not have a method called #{condition}")
-        end
       end
     end
 
@@ -93,10 +75,11 @@ class FeatureTest < Test::Unit::TestCase
         end
       end
 
-      should "not have any errors when run" do
-        result = run_feature @feature_without_scenarios
-        Object::RUBY_VERSION =~ /^1.9/ ? assert(result) : assert(result.passed?)
+      should "not have any test" do
+        assert(@feature_without_scenarios.tests.empty?)
       end
+        #result = run_feature @feature_without_scenarios.tests.first.new("default")
+        #Object::RUBY_VERSION =~ /^1.9/ ? assert(result) : assert(result.passed?)
     end
 
     context "that does not have any errors" do
@@ -114,10 +97,10 @@ class FeatureTest < Test::Unit::TestCase
 
       context "with a block containing a scenario" do
         should "create a Feature instance method named 'test_<underscored_scenario_name>'" do
-          @feature_without_errors.Scenario "pending scenario"
+          @feature_without_errors.Scenario("pending scenario") {}
           test_name = "test_pending_scenario"
           test_name = :test_pending_scenario if RUBY_VERSION =~ /^1.9/
-          assert(@feature_without_errors.instance_methods.include?(test_name), "Feature is missing test method from scenario")
+          assert(@feature_without_errors.tests.first.instance_methods.include?(test_name), "Test is missing test method from scenario")
         end
 
         should "create a Scenario" do
