@@ -12,8 +12,8 @@ module Coulda
 
     %w[in_order_to as_a i_want_to].each do |intent|
       eval <<-HERE
-        def #{intent}(val)
-          @#{intent} = val
+        def #{intent}(val = nil)
+          val ? @#{intent} = val : @#{intent}
         end
       HERE
     end
@@ -21,7 +21,7 @@ module Coulda
     %w[Given When Then And].each do |stmt|
       eval <<-HERE
         def #{stmt}(text, &block)
-          @current_scenario.statements << text
+          @current_scenario.statements << { :type => :#{stmt}, :text => text }
           @current_scenario.steps << block if block
         end
       HERE

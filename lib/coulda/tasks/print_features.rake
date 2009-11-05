@@ -3,15 +3,6 @@ namespace :coulda do
   task :print_features do
 
     require 'rubygems'
-    #require 'active_support'
-
-    def file_name_to_feature(name)
-      name =~ /\/([\w\s_]+)\.rb$/
-      file_prefix = $1
-      file_prefix.gsub!(/[Tt]est/,"")
-      klass_name = Feature.feature_name_from(file_prefix)
-      Object.const_defined?(klass_name) ? klass_name.constantize : nil
-    end
 
     $LOAD_PATH.unshift("test")
 
@@ -23,21 +14,20 @@ namespace :coulda do
     test_files = Dir.glob(File.join('test', '**', '*_test.rb'))
     test_files.each do |file|
       load file
-      File.basename(file, '.rb')
-      feature = file_name_to_feature(file)
-      next unless feature
+    end
 
-      next unless feature.ancestors.include?(Feature)
+    ObjectSpace.each_object do |obj|
+      next unless obj.is_a? Feature
 
-      puts "Feature: #{feature.description}"
-      puts "  In order to #{feature.in_order_to}" if feature.in_order_to
-      puts "  As a #{feature.as_a}" if feature.as_a
-      puts "  I want to #{feature.i_want_to}" if feature.i_want_to
-      feature.scenarios.each do |scenario|
+      puts "Feature: #{obj.name}"
+      puts "  In order to #{obj.in_order_to}" if obj.in_order_to
+      puts "  As a #{obj.as_a}" if obj.as_a
+      puts "  I want to #{obj.i_want_to}" if obj.i_want_to
+      obj.scenarios.each do |scenario|
         puts
         puts "  Scenario: #{scenario.name} #{scenario.pending? ? '(pending)' : ''}"
         scenario.statements.each do |stmt|
-          puts "    #{stmt.type.to_s.capitalize} #{stmt.name}"
+          puts "    #{stmt[:type].to_s} #{stmt[:text]}"
         end
       end
     end
