@@ -9,12 +9,8 @@ class Scenario
     @pending = false
     @test_class = Class.new(Test::Unit::TestCase)
     if block
-      my_feature.current_scenario = self
-      my_feature.instance_eval &block
-      class << @test_class
-        attr_accessor :test_steps
-      end
-      @test_class.test_steps = @steps
+      execute block, :within => my_feature
+      inject_test_steps_into @test_class
       define_test_method { self.class.test_steps.each { |s| my_feature.instance_eval &s } }
     else
       @pending = true
@@ -28,5 +24,20 @@ class Scenario
   
   def define_test_method(&block)
     @test_class.send(:define_method, "test_#{@name.downcase.super_custom_underscore}", &block)
+  end
+
+  private
+
+  def execute(block, params = {})
+    feature = params[:within]
+    feature.current_scenario = self
+    feature.instance_eval &block
+  end
+
+  def inject_test_steps_into(test_class)
+    class << test_class
+      attr_accessor :test_steps
+    end
+    test_class.test_steps = @steps
   end
 end
