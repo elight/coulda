@@ -29,7 +29,6 @@ module Coulda
 
     def Scenario(scenario_name, &block)
       @scenarios << scenario = Scenario.new(scenario_name, self, &block)
-      block.bind(self) if block
       scenario
     end
 
