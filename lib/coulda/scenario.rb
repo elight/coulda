@@ -10,12 +10,12 @@ class Scenario
     @test_class = Class.new(Test::Unit::TestCase)
     if block
       my_feature.current_scenario = self
-      block.bind(my_feature).call
+      my_feature.instance_eval &block
       class << @test_class
         attr_accessor :test_steps
       end
       @test_class.test_steps = @steps
-      define_test_method { self.class.test_steps.each { |s| s.bind(my_feature).call } }
+      define_test_method { self.class.test_steps.each { |s| my_feature.instance_eval &s } }
     else
       @pending = true
       define_test_method { pending }

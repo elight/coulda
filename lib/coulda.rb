@@ -13,7 +13,7 @@ require 'coulda/scenario'
 module Kernel
   def Feature(name, &block)
     f = Feature.new(name)
-    block.bind(f).call if block_given?
+    f.instance_eval &block if block_given?
     f.assert_presence_of_intent
     f
   end
