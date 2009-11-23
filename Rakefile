@@ -6,7 +6,7 @@ require 'rake/gempackagetask'
 
 require 'lib/coulda/tasks'
 
-gem 'thoughtbot-shoulda'
+gem 'shoulda'
 require 'shoulda'
 
 # Test::Unit::UI::VERBOSE

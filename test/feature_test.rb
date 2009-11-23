@@ -78,8 +78,6 @@ class FeatureTest < Test::Unit::TestCase
       should "not have any test" do
         assert(@feature_without_scenarios.tests.empty?)
       end
-        #result = run_feature @feature_without_scenarios.tests.first.new("default")
-        #Object::RUBY_VERSION =~ /^1.9/ ? assert(result) : assert(result.passed?)
     end
 
     context "that does not have any errors" do
@@ -96,10 +94,10 @@ class FeatureTest < Test::Unit::TestCase
       ### Integration tests
 
       context "with a block containing a scenario" do
-        should "create a Feature instance method named 'test_<underscored_scenario_name>'" do
+        should "create a Feature instance method named 'test_<underscored_feature_name>_<underscored_scenario_name>'" do
           @feature_without_errors.Scenario("pending scenario") {}
           test_name = "test_pending_scenario"
-          test_name = :test_pending_scenario if RUBY_VERSION =~ /^1.9/
+          test_name = test_name.to_sym if RUBY_VERSION =~ /^1.9/
           assert(@feature_without_errors.tests.first.instance_methods.include?(test_name), "Test is missing test method from scenario")
         end
 

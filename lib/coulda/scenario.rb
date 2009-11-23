@@ -13,12 +13,18 @@ module Coulda
       @testcase_class = klass
     end
 
+    def self.testcase_class
+      @testcase_class
+    end
+
     def initialize(name, my_feature, &block)
+      raise Exception.new("Scenario must have a name") unless name 
       @name = name
       @statements = []
       @steps = []
       @pending = false
-      @test_class = Class.new(Test::Unit::TestCase)
+      @test_class = ::Class.new(Scenario.testcase_class || Test::Unit::TestCase)
+      assign_test_class_to_const(my_feature)
       if block
         execute block, :within => my_feature
         inject_test_steps_into @test_class
@@ -35,6 +41,13 @@ module Coulda
     end
     
     private
+
+    def assign_test_class_to_const(my_feature)
+      base_name = "#{my_feature.name}_#{@name}_#{rand(1_000_000_000)}"
+      base_name = "letter_" + base_name if base_name =~ /^[^a-zA-Z]/
+      titleized_underscored_name = base_name.super_custom_underscore.gsub(/\b('?[a-z])/) { $1.upcase }
+      ::Module.const_set(titleized_underscored_name, @test_class)
+    end
 
     def define_test_method(&block)
       @test_class.send(:define_method, "test_#{@name.downcase.super_custom_underscore}", &block)

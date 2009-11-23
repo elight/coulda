@@ -27,3 +27,9 @@ Cleanup
 - Minor refactorings
 - Added more examples
 - Adds "And" support to Given, When, and Then
+
+0.4.0
+-----
+- Complete internal redesign/rewrite
+- Feature method now accepts a :testcase_class => Class argument specifying the subclass of Test::Unit::TestCase,
+  allowing for simple integration with other Test::Unit frameworks
