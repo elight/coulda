@@ -25,13 +25,12 @@ module Coulda
       @pending = false
       @test_class = ::Class.new(Scenario.testcase_class || Test::Unit::TestCase)
       assign_test_class_to_const(my_feature)
+      test_impl = nil
       if block
-        execute block, :within => my_feature
-        inject_test_steps_into @test_class
-        define_test_method { self.class.test_steps.each { |s| my_feature.instance_eval &s } }
+        create_and_provision_test_method_for my_feature, &block
       else
         @pending = true
-        define_test_method { pending }
+        define_test_method_using { pending }
       end
     end
 
@@ -42,6 +41,12 @@ module Coulda
     
     private
 
+    def create_and_provision_test_method_for(feature, &block)
+      execute block, :within => feature
+      inject_test_steps_into @test_class
+      define_test_method_using { self.class.test_steps.each { |s| feature.instance_eval &s } }
+    end
+
     def assign_test_class_to_const(my_feature)
       base_name = "#{my_feature.name}_#{@name}_#{rand(1_000_000_000)}"
       base_name = "letter_" + base_name if base_name =~ /^[^a-zA-Z]/
@@ -49,7 +54,7 @@ module Coulda
       ::Module.const_set(titleized_underscored_name, @test_class)
     end
 
-    def define_test_method(&block)
+    def define_test_method_using(&block)
       @test_class.send(:define_method, "test_#{@name.downcase.super_custom_underscore}", &block)
     end
 
