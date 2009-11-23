@@ -15,7 +15,7 @@ module MyMacros
 end
 
 Feature "Painfully obvious" do
-  include MyMacros
+  extend MyMacros
 
   in_order_to "demonstrate a simple test"
   as_a "coulda developer"
