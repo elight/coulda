@@ -1,15 +1,19 @@
-coulda
+Coulda
 ------
-coulda gives you Cucumber-like BDD power but with an internal DSL.  This means no "call-by-regexp" and
-no Gherkin/plain-text/external DSL.  coulda is just code -- but with a Cucumber-like take on BDD.
+Coulda gives you Cucumber-like BDD power but with an internal DSL.  This means no "call-by-regexp" and
+no Gherkin/plain-text/external DSL.  Coulda is just code -- but with a Cucumber-like take on BDD.
 
-coulda, obviously was inspired by Cucumber, Shoulda, but also Thor.  coulda believes that the best way to reuse
+Coulda, obviously was inspired by Cucumber, Shoulda, but also Thor.  Coulda believes that the best way to reuse
 code is the good ol' fashioned method.  Instead of sharing files of regexps mapped to procs, you just write
 methods.  That simple.
 
 You can define the implementation of your Given/When/Then right there with the behavior description.  Or,
 if you want to reuse some Givens/Whens/Thens, just write a method!  And if you find your Feature is getting
 too bloated or that you would like to reuse Givens/Whens/Thens between features, put them in a helper.
+
+Coulda also easily supports your Test::Unit framework of choice (including Rails Tests).
+
+See http://coulda.tiggerpalace.com for more information.
 
 Easy as pie.
 
