@@ -4,7 +4,7 @@ end
 
 require 'test/unit'
 
-gem 'jeremymcanally-pending', '>= 0.1'
+gem 'pending', '>= 0.1.1'
 require 'pending'
 
 require 'coulda/feature'

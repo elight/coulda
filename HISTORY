@@ -33,3 +33,8 @@ Cleanup
 - Complete internal redesign/rewrite
 - Feature method now accepts a :testcase_class => Class argument specifying the subclass of Test::Unit::TestCase,
   allowing for simple integration with other Test::Unit frameworks
+
+0.4.1
+-----
+- Modified to use 'pending' instead of 'jeremymcanally-pending' from github (after I removed the 'bones' gem 
+  dependency from 'pending')
