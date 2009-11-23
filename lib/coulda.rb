@@ -11,8 +11,8 @@ require 'coulda/feature'
 require 'coulda/scenario'
 
 module Kernel
-  def Feature(name, &block)
-    f = Feature.new(name)
+  def Feature(name, opts = {}, &block)
+    f = Feature.new(name, opts)
     f.instance_eval &block if block_given?
     f.assert_presence_of_intent
     f

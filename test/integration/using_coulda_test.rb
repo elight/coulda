@@ -1,6 +1,6 @@
 require File.join(File.dirname(__FILE__), "..", "test_helper")
 
-Feature "Using Coulda" do
+Feature "Using Coulda", :testcase_class => Test::Unit::TestCase do
   in_order_to "perform lightweight integration/acceptance testing with Coulda"
   as_a "developer"
   i_want_to "have typical Coulda usage work"
