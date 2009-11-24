@@ -2,8 +2,6 @@ namespace :coulda do
   desc "Print all features as plain text"
   task :print_features do
 
-    require 'rubygems'
-
     $LOAD_PATH.unshift("test")
 
     require 'test/unit'
@@ -11,7 +9,7 @@ namespace :coulda do
     # bug in test unit.  Set to true to stop from running.
     Test::Unit.run = true
 
-    test_files = Dir.glob(File.join('test', '**', '*_test.rb'))
+    test_files = Dir.glob(File.join('test', '**', '*_feature.rb'))
     test_files.each do |file|
       load file
     end

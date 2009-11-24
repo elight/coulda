@@ -42,3 +42,8 @@ Cleanup
 0.4.2
 -----
 - Moved 'vendored' files under coulda and added them to the gemspec (woops)
+
+0.4.3
+-----
+- Put missing rake task in the gemspec
+- Added examples that were previously in the git repo but not in the gemspec

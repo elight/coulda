@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{coulda}
-  s.version = "0.4.2"
+  s.version = "0.4.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Evan David Light"]
@@ -17,19 +17,25 @@ Gem::Specification.new do |s|
      "README.rdoc"
   ]
   s.files = [
-     ".gitignore",
      "HISTORY",
      "LICENSE",
      "README.rdoc",
      "Rakefile",
      "VERSION",
      "coulda.gemspec",
+     "example/feature_with_pending_scenario.rb",
+     "example/macros_in_a_module.rb",
+     "example/pending_feature.rb",
+     "example/pending_feature_with_purpose.rb",
      "example/sample.rb",
+     "example/simple_reuse_via_method.rb",
+     "example/simple_scenario.rb",
      "geminstaller.yml",
      "lib/coulda.rb",
      "lib/coulda/feature.rb",
      "lib/coulda/scenario.rb",
      "lib/coulda/tasks.rb",
+     "lib/coulda/tasks/print_features.rake",
      "lib/coulda/vendor/constantize.rb",
      "lib/coulda/vendor/underscore.rb",
      "test/feature_test.rb",
