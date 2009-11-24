@@ -38,3 +38,7 @@ Cleanup
 -----
 - Modified to use 'pending' instead of 'jeremymcanally-pending' from github (after I removed the 'bones' gem 
   dependency from 'pending')
+
+0.4.2
+-----
+- Moved 'vendored' files under coulda and added them to the gemspec (woops)
