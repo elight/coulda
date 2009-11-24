@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{coulda}
-  s.version = "0.4.1"
+  s.version = "0.4.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Evan David Light"]
@@ -30,6 +30,8 @@ Gem::Specification.new do |s|
      "lib/coulda/feature.rb",
      "lib/coulda/scenario.rb",
      "lib/coulda/tasks.rb",
+     "lib/coulda/vendor/constantize.rb",
+     "lib/coulda/vendor/underscore.rb",
      "test/feature_test.rb",
      "test/integration/using_coulda_test.rb",
      "test/regression/issue_1_test.rb",

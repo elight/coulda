@@ -9,6 +9,8 @@ require 'pending'
 
 require 'coulda/feature'
 require 'coulda/scenario'
+require 'coulda/vendor/constantize'
+require 'coulda/vendor/underscore'
 
 module Kernel
   def Feature(name, opts = {}, &block)
@@ -19,5 +21,3 @@ module Kernel
   end
 end
 
-require 'vendor/constantize'
-require 'vendor/underscore'
