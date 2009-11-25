@@ -9,19 +9,17 @@ namespace :coulda do
     # bug in test unit.  Set to true to stop from running.
     Test::Unit.run = true
 
-    test_files = Dir.glob(File.join('test', '**', '*_feature.rb'))
+    test_files = Dir.glob(File.join('test', '**', '*_test.rb'))
     test_files.each do |file|
       load file
     end
 
-    ObjectSpace.each_object do |obj|
-      next unless obj.is_a? Feature
-
-      puts "Feature: #{obj.name}"
-      puts "  In order to #{obj.in_order_to}" if obj.in_order_to
-      puts "  As a #{obj.as_a}" if obj.as_a
-      puts "  I want to #{obj.i_want_to}" if obj.i_want_to
-      obj.scenarios.each do |scenario|
+    Coulda::World.features.each do |feature|
+      puts "Feature: #{feature.name}"
+      puts "  In order to #{feature.in_order_to}" if feature.in_order_to
+      puts "  As a #{feature.as_a}" if feature.as_a
+      puts "  I want to #{feature.i_want_to}" if feature.i_want_to
+      feature.scenarios.each do |scenario|
         puts
         puts "  Scenario: #{scenario.name} #{scenario.pending? ? '(pending)' : ''}"
         scenario.statements.each do |stmt|

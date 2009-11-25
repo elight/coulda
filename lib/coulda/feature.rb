@@ -10,6 +10,7 @@ module Coulda
     attr_accessor :current_scenario
 
     def initialize(name, opts = {})
+      World.register_feature(self)
       @name = name
       @scenarios = []
       Scenario.testcase_class = opts[:testcase_class] if opts[:testcase_class]
