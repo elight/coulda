@@ -52,3 +52,7 @@ Cleanup
 -----
 - Reversed decision on naming "feature" files as _feature.rb.  Should just be _test.rb like any other test
 - Features now register with a World when they are created which is used in the rake task instead of ObjectSpace.each_object
+
+0.4.5
+-----
+- No longer requires rubygems for Ruby 1.9.1

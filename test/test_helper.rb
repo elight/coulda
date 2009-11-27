@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'rubygems'
+require 'rubygems' if RUBY_VERSION != "1.9.1"
 require 'shoulda'
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), "..", "lib")
