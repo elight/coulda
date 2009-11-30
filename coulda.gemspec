@@ -45,7 +45,7 @@ Gem::Specification.new do |s|
      "test/scenario_test.rb",
      "test/test_helper.rb"
   ]
-  s.homepage = %q{http://evan.tiggerpalace.com/}
+  s.homepage = %q{http://coulda.tiggerpalace.com/}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
