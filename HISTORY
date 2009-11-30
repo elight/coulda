@@ -56,3 +56,8 @@ Cleanup
 0.4.5
 -----
 - No longer requires rubygems for Ruby 1.9.1
+
+0.4.6
+-----
+- Fixed issue where Scenario implementations were not delegating unresolved method calls to the wrapped test.  Should allow for usage of tools such as Webrat
+

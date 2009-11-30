@@ -44,7 +44,13 @@ module Coulda
     def create_and_provision_test_method_for(feature, &block)
       execute block, :within => feature
       inject_test_steps_into @test_class
-      define_test_method_using { self.class.test_steps.each { |s| feature.instance_eval &s } }
+      define_test_method_using do
+        feature.test_instance = self
+        self.class.test_steps.each do |s|
+          feature.instance_eval &s
+        end
+        feature.test_instance = nil
+      end
     end
 
     def assign_test_class_to_const(my_feature)

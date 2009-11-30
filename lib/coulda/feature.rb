@@ -7,7 +7,7 @@ module Coulda
     include Test::Unit::Assertions
 
     attr_reader :scenarios, :name
-    attr_accessor :current_scenario
+    attr_accessor :current_scenario, :test_instance
 
     def initialize(name, opts = {})
       World.register_feature(self)
@@ -52,6 +52,12 @@ module Coulda
       presence = %w[in_order_to as_a i_want_to].map { |intent| instance_variable_get("@#{intent}") }
       if presence.any? { |p| p } && !presence.all? { |p| p }
         raise SyntaxError.new("Must have all or none of in_order, as_a, and i_want_to called in a Feature")
+      end
+    end
+
+    def method_missing(name, *args)
+      if test_instance
+        test_instance.__send__(name, *args)
       end
     end
   end
