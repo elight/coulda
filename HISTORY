@@ -61,3 +61,6 @@ Cleanup
 -----
 - Fixed issue where Scenario implementations were not delegating unresolved method calls to the wrapped test.  Should allow for usage of tools such as Webrat
 
+0.4.7
+-----
+- Aded a newline after a Feature has been printed via the coulda:print_features task

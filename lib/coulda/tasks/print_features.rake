@@ -26,6 +26,7 @@ namespace :coulda do
           puts "    #{stmt[:type].to_s} #{stmt[:text]}"
         end
       end
+      puts
     end
   end
 end
