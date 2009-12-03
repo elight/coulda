@@ -1,17 +1,29 @@
 require File.join(File.dirname(__FILE__), "..", "test_helper")
 
+require 'rr'
+
 Feature "Using Coulda", :testcase_class => Test::Unit::TestCase do
+  include RR::Adapters::TestUnit
+
   in_order_to "perform lightweight integration/acceptance testing with Coulda"
   as_a "developer"
   i_want_to "have typical Coulda usage work"
+
+  begin
+    raise Exception.new
+  rescue Exception => e
+    puts e.backtrace
+  end
 
   def prove_methods_from_then_invokes_method_on_feature
     assert true
   end
 
   Scenario "A pending scenario with a Given/When/Then without a block" do
-    Given "this scenario"
-    When "an event happens" do; end
+    Given "this scenario which should be pending" do
+      mock(self).pending
+    end
+    When "an event happens"
     Then "should not error/fail because it is pending" do; end
   end
 

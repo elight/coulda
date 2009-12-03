@@ -18,15 +18,5 @@ class ScenarioTest < Test::Unit::TestCase
       end
     end
   end
-
-  should "allow Test::Unit::TestCase class to subclass to be set" do
-    Scenario.testcase_class = Test::Unit::TestCase
-  end
-
-  should "raise an Exception if provided a class that does not inherit from Test::Unit::TestCase" do
-    assert_raises Exception do
-      Scenario.testcase_class = Object
-    end
-  end
 end
 

@@ -64,3 +64,8 @@ Cleanup
 0.4.7
 -----
 - Aded a newline after a Feature has been printed via the coulda:print_features task
+
+0.5.0
+-----
+- Coulda::Features are now gone in favor of the Kernel::Feature method hook returning a subclass of Test::Unit::TestCase (or a subclass of the specified :testcase_class).  This should simplify almost everything henceforward
+- The block passed to Kernel::Feature changes self to be the Test::Unit::TestCase subclass.  That way, it's virtually identical to a "class Foo < Test::Unit::TestCase"

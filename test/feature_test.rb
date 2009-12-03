@@ -1,7 +1,15 @@
 require File.join(File.dirname(__FILE__), "test_helper")
 
 class FeatureTest < Test::Unit::TestCase
+
+  should "be able to subclass any child class of TestCase" do
+    MyTestCase = Class.new(Test::Unit::TestCase)
+    feature = Feature "a child class", :testcase_class => MyTestCase
+    assert feature.ancestors.include? Test::Unit::TestCase
+  end
+
   context "A Feature" do
+    @@counter = 1
     setup do
       @feature = Feature "foobarblech#{@@counter}" do
         Scenario "" do
@@ -9,10 +17,11 @@ class FeatureTest < Test::Unit::TestCase
           Then "" do; end
         end
       end
+      @@counter += 1
     end
 
-    should "contain tests" do
-      assert(@feature.tests.first)
+    should "be a Test::Unit::TestCase by default" do
+      assert @feature.ancestors.include? Test::Unit::TestCase
     end
 
     %w[Given When Then And].each do |condition|
@@ -75,20 +84,18 @@ class FeatureTest < Test::Unit::TestCase
         end
       end
 
-      should "not have any test" do
-        assert(@feature_without_scenarios.tests.empty?)
+      should "not have any tests" do
+        assert @feature_without_scenarios.instance_methods.grep(/^test_/).empty?
       end
     end
 
     context "that does not have any errors" do
-      @@counter = 1
       setup do
         @feature_without_errors = Feature @@counter.to_s do
           in_order_to "foo"
           as_a "bar"
           i_want_to "blech"
         end
-        @@counter += 1
       end
 
       ### Integration tests
@@ -98,7 +105,7 @@ class FeatureTest < Test::Unit::TestCase
           @feature_without_errors.Scenario("pending scenario") {}
           test_name = "test_pending_scenario"
           test_name = test_name.to_sym if RUBY_VERSION =~ /^1.9/
-          assert(@feature_without_errors.tests.first.instance_methods.include?(test_name), "Test is missing test method from scenario")
+          assert(@feature_without_errors.instance_methods.include?(test_name), "Test is missing test method from scenario")
         end
 
         should "create a Scenario" do

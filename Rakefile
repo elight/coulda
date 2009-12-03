@@ -32,7 +32,7 @@ begin
     s.description = "Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse"
   end
 rescue LoadError
-  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+  puts "Jeweler not available. Install it with: sudo gem install jeweler -s http://gems.github.com"
 end
 
 
