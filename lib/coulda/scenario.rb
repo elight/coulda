@@ -2,13 +2,12 @@ module Coulda
   # A factory for Test::Unit::TestCase test methods
   class Scenario
     attr_reader :name, :test_class
-    attr_accessor :steps, :statements
+    attr_accessor :statements
 
     def initialize(name, my_feature, &block)
       raise Exception.new("Scenario must have a name") unless name 
       @name = name
       @statements = []
-      @steps = []
       @pending = false
       @my_feature = my_feature
       if block_given?

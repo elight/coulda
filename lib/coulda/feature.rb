@@ -31,7 +31,7 @@ module Test
           def self.#{stmt}(text, &block)
             step = nil
             if block_given?
-              current_scenario.steps << step = block
+              step = block
             end
             caller[0] =~ (/(.*):(.*)(:in)?/)
             current_scenario.statements << { :type => :#{stmt}, :text => text, :block => step, :file => $1, :line => $2}
