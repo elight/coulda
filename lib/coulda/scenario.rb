@@ -33,7 +33,7 @@ module Coulda
           if stmt[:block]
             self.instance_eval &(stmt[:block])
           else
-            pending
+            pending self.class.current_scenario, stmt
             break
           end
         end

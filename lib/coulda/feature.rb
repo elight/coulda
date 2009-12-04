@@ -35,7 +35,8 @@ module Test
             if block_given?
               current_scenario.steps << step = block
             end
-            current_scenario.statements << { :type => :#{stmt}, :text => text, :block => step }
+            caller[0] =~ (/(.*):(.*)(:in)?/)
+            current_scenario.statements << { :type => :#{stmt}, :text => text, :block => step, :file => $1, :line => $2}
           end
         HERE
       end

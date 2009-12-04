@@ -35,6 +35,7 @@ Gem::Specification.new do |s|
      "lib/coulda/feature.rb",
      "lib/coulda/scenario.rb",
      "lib/coulda/tasks.rb",
+     "lib/coulda/pending.rb",
      "lib/coulda/tasks/print_features.rake",
      "lib/coulda/vendor/constantize.rb",
      "lib/coulda/vendor/underscore.rb",

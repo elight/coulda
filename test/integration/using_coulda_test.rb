@@ -15,7 +15,7 @@ Feature "Using Coulda", :testcase_class => Test::Unit::TestCase do
 
   Scenario "A pending scenario with a Given/When/Then without a block" do
     Given "this scenario which should be pending" do
-      mock(self).pending.times(1)
+      mock(self).pending(anything, anything).times(1)
     end
     When "an event happens"
     Then "should not error/fail because it is pending" do; end

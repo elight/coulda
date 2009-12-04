@@ -4,12 +4,10 @@ end
 
 require 'test/unit'
 
-gem 'pending', '>= 0.1.1'
-require 'pending'
-
 require 'coulda/world'
 require 'coulda/feature'
 require 'coulda/scenario'
+require 'coulda/pending'
 require 'coulda/vendor/constantize'
 require 'coulda/vendor/underscore'
 
