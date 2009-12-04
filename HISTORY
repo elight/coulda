@@ -70,3 +70,8 @@ Cleanup
 - Coulda::Features created from the Kernel::Feature method now create and return a subclass of Test::Unit::TestCase (or a subclass of the specified :testcase_class).
 - The block passed to Kernel::Feature changes self to be the Test::Unit::TestCase subclass.  That way, it's virtually identical to a "class Foo < Test::Unit::TestCase"
 - Removed dependency on Jeremy McAnally's "pending" gem in favor of an implementation targetted specifically to Coulda's needs (File names and line numbers of the Given/When/Then/And that is unimplemented)
+
+0.5.1
+-----
+- Adds support for call-by-name/symbol (i.e., "Given :some_method invokes the 'some_method' method")
+- Mocked pending within test Scenarios so that the test suite passes instead of incorrectly reporting pending tests
