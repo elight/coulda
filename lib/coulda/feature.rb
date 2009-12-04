@@ -34,7 +34,11 @@ module Test
               step = block
             end
             caller[0] =~ (/(.*):(.*)(:in)?/)
-            current_scenario.statements << { :type => :#{stmt}, :text => text, :block => step, :file => $1, :line => $2}
+            stmt = { :type => :#{stmt}, :text => text, :block => step, :file => $1, :line => $2 }
+            if text.is_a? Symbol
+              stmt[:method] = text
+            end
+            current_scenario.statements << stmt
           end
         HERE
       end

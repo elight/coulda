@@ -42,4 +42,12 @@ Feature "Using Coulda", :testcase_class => Test::Unit::TestCase do
     Then "something else" do; end
     And "should pass" do; end
   end
+
+  Scenario "A scenario that invokes a method by name" do
+    Given :some_method
+
+    Then "'some_method' should have been called" do
+      mock(self.class).some_method
+    end
+  end
 end

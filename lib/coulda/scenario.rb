@@ -8,14 +8,9 @@ module Coulda
       raise Exception.new("Scenario must have a name") unless name 
       @name = name
       @statements = []
-      @pending = false
+      @pending = true
       @my_feature = my_feature
-      if block_given?
-        create_and_provision_test_method_using &block
-      else
-        @pending = true
-        define_test_method_using { pending }
-      end
+      create_and_provision_test_method_using &block
     end
 
     # Predicate indicating if the Scenario was provided with an example
@@ -27,6 +22,7 @@ module Coulda
 
     def create_and_provision_test_method_using(&block)
       collect_scenario_statements_from &block
+      @pending = false unless has_pending_statements?
       define_test_method_using do
         self.class.current_scenario.statements.each do |stmt|
           if stmt[:block]
@@ -41,15 +37,21 @@ module Coulda
 
     def collect_scenario_statements_from(&block)
       @my_feature.current_scenario = self
-      @my_feature.instance_eval &block
+      if block_given?
+        @my_feature.instance_eval &block 
+      end
     end
 
     def define_test_method_using(&block)
       scenario = self
       @my_feature.send(:define_method, "test_#{@name.downcase.super_custom_underscore}") do
         self.class.current_scenario = scenario
-        self.instance_eval &block
+        self.instance_eval &block if block
       end
+    end
+
+    def has_pending_statements?
+      statements.find { |s| s[:block].nil? && s[:method].nil? }
     end
   end
 end
