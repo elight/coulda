@@ -13,11 +13,11 @@ class PendingScenariosTest < Test::Unit::TestCase
         include RR::Adapters::TestUnit
 
         @scenario = Scenario "my scenario" do
-          Given "something"
-          When "the when"
-          Then "the then" do
+          Given "this scenario that will call #pending because it has a pending step" do
             mock(self).pending
           end
+          When "I have this pending step"
+          Then "the test should pass anyway because I mocked pending"
         end
         @@counter += 1
       end

@@ -8,24 +8,28 @@ module Coulda
       raise Exception.new("Scenario must have a name") unless name 
       @name = name
       @statements = []
-      @pending = true
       @my_feature = my_feature
       create_and_provision_test_method_using &block
     end
 
     # Predicate indicating if the Scenario was provided with an example
     def pending?
-      @pending
+      statements.empty? || has_pending_statements?
     end
     
     private
 
     def create_and_provision_test_method_using(&block)
       collect_scenario_statements_from &block
-      @pending = false unless has_pending_statements?
       define_test_method_using do
         self.class.current_scenario.statements.each do |stmt|
-          if stmt[:block]
+          if stmt[:method]
+            if stmt[:block]
+              raise Exception.new "Passing a block to a method called-by-name is currently unhandle"
+            else
+              self.__send__(stmt[:method])
+            end
+          elsif stmt[:block]
             self.instance_eval &(stmt[:block])
           else
             pending self.class.current_scenario, stmt

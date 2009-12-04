@@ -9,6 +9,8 @@ Feature "Using Coulda", :testcase_class => Test::Unit::TestCase do
   as_a "developer"
   i_want_to "have typical Coulda usage work"
 
+  def some_method; end
+
   def prove_methods_from_then_invokes_method_on_feature
     assert true
   end
@@ -44,10 +46,12 @@ Feature "Using Coulda", :testcase_class => Test::Unit::TestCase do
   end
 
   Scenario "A scenario that invokes a method by name" do
-    Given :some_method
-
-    Then "'some_method' should have been called" do
-      mock(self.class).some_method
+    Given "a method" do
+      mock(self).some_method
     end
+
+    When :some_method
+
+    Then "'some_method' should have been called" do; end
   end
 end
