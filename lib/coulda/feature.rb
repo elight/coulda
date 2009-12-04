@@ -32,10 +32,8 @@ module Test
           # Specifies a prereqisite, event, or expectation.  May be used in any order within the spec
           def self.#{stmt}(text, &block)
             step = nil
-            if block
+            if block_given?
               current_scenario.steps << step = block
-            else
-              current_scenario.steps << step = lambda { pending }
             end
             current_scenario.statements << { :type => :#{stmt}, :text => text, :block => step }
           end

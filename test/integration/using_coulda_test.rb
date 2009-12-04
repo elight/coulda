@@ -9,19 +9,13 @@ Feature "Using Coulda", :testcase_class => Test::Unit::TestCase do
   as_a "developer"
   i_want_to "have typical Coulda usage work"
 
-  begin
-    raise Exception.new
-  rescue Exception => e
-    puts e.backtrace
-  end
-
   def prove_methods_from_then_invokes_method_on_feature
     assert true
   end
 
   Scenario "A pending scenario with a Given/When/Then without a block" do
     Given "this scenario which should be pending" do
-      mock(self).pending
+      mock(self).pending.times(1)
     end
     When "an event happens"
     Then "should not error/fail because it is pending" do; end

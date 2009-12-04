@@ -29,8 +29,13 @@ module Coulda
     def create_and_provision_test_method_using(&block)
       collect_scenario_statements_from &block
       define_test_method_using do
-        self.class.current_scenario.statements.each do |s|
-          self.instance_eval &(s[:block])
+        self.class.current_scenario.statements.each do |stmt|
+          if stmt[:block]
+            self.instance_eval &(stmt[:block])
+          else
+            pending
+            break
+          end
         end
       end
     end
