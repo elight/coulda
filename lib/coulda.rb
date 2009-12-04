@@ -18,6 +18,7 @@ module Kernel
     Coulda::assign_class_to_const test_class, name
     test_class.class_eval &block if block_given?
     test_class.assert_presence_of_intent
+    World.register_feature(test_class, name)
     test_class
   end
 end

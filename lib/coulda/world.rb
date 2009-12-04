@@ -1,7 +1,7 @@
 module Coulda
   class World
-    def self.register_feature(feature)
-      (@features ||= []) << feature
+    def self.register_feature(feature, name)
+      (@features ||= []) << [feature, name]
     end
 
     def self.features

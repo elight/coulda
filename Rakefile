@@ -24,7 +24,6 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
     s.name = "coulda"
-    s.version = "0.1.1"
     s.authors = ["Evan David Light"]
     s.email = "evan@tiggerpalace.com"
     s.summary = "Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse"

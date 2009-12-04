@@ -16,8 +16,6 @@ module Test
         @current_scenario
       end
 
-      World.register_feature(self)
-
       %w[in_order_to as_a i_want_to].each do |intent|
         eval <<-HERE
           # An intent specifier

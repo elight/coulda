@@ -14,8 +14,8 @@ namespace :coulda do
       load file
     end
 
-    Coulda::World.features.each do |feature|
-      puts "Feature: #{feature.name}"
+    Coulda::World.features.each do |feature, name|
+      puts "Feature: #{name}"
       puts "  In order to #{feature.in_order_to}" if feature.in_order_to
       puts "  As a #{feature.as_a}" if feature.as_a
       puts "  I want to #{feature.i_want_to}" if feature.i_want_to
