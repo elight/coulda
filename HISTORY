@@ -75,3 +75,7 @@ Cleanup
 -----
 - Adds support for call-by-name/symbol (i.e., "Given :some_method invokes the 'some_method' method")
 - Mocked pending within test Scenarios so that the test suite passes instead of incorrectly reporting pending tests
+
+0.5.2
+-----
+- coulda:print_features now requires 'coulda' (duh)

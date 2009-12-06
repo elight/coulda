@@ -9,6 +9,8 @@ namespace :coulda do
     # bug in test unit.  Set to true to stop from running.
     Test::Unit.run = true
 
+    require 'coulda'
+
     test_files = Dir.glob(File.join('test', '**', '*_test.rb'))
     test_files.each do |file|
       load file
