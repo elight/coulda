@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{coulda}
-  s.version = "0.5.2"
+  s.version = "0.5.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Evan David Light"]
-  s.date = %q{2009-12-06}
+  s.date = %q{2009-12-08}
   s.description = %q{Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse}
   s.email = %q{evan@tiggerpalace.com}
   s.extra_rdoc_files = [

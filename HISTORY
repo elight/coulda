@@ -79,3 +79,7 @@ Cleanup
 0.5.2
 -----
 - coulda:print_features now requires 'coulda' (duh)
+
+0.5.3
+-----
+- coulda:print_features better indicates which scenarios and which steps are pending

@@ -23,9 +23,13 @@ namespace :coulda do
       puts "  I want to #{feature.i_want_to}" if feature.i_want_to
       feature.scenarios.each do |scenario|
         puts
-        puts "  Scenario: #{scenario.name} #{scenario.pending? ? '(pending)' : ''}"
+        print "  "
+        print "(**PENDING**) " if scenario.pending?
+        puts "Scenario: #{scenario.name}"
         scenario.statements.each do |stmt|
-          puts "    #{stmt[:type].to_s} #{stmt[:text]}"
+          print "    "
+          print "(**PENDING**) " unless stmt[:block]
+          puts "#{stmt[:type].to_s} #{stmt[:text]}"
         end
       end
       puts
