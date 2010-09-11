@@ -1,39 +1,18 @@
 require 'rubygems'
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
-require 'rake/gempackagetask'
-
-require 'lib/coulda/tasks'
 
 gem 'shoulda'
 require 'shoulda'
 
 # Test::Unit::UI::VERBOSE
-test_files_pattern = 'test/**/*_test.rb'
-src_files_pattern = 'src/**/*.rb'
-
-Rake::TestTask.new do |t|
-  src_files = Dir[src_files_pattern]
+Rake::TestTask.new('test') do |t|
+  t.libs << 'test'
+  src_files = Dir.glob('src/**/*.rb')
   src_files.each { |f| puts f; require f[0...-3] }
-  t.pattern = test_files_pattern
-  t.verbose = false
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = true
 end
-
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |s|
-    s.name = "coulda"
-    s.authors = ["Evan David Light"]
-    s.email = "evan@tiggerpalace.com"
-    s.summary = "Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse"
-    s.homepage = "http://evan.tiggerpalace.com/"
-    s.description = "Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse"
-  end
-rescue LoadError
-  puts "Jeweler not available. Install it with: sudo gem install jeweler -s http://gems.github.com"
-end
-
 
 desc 'Default: run tests.'
 task :default => 'test'

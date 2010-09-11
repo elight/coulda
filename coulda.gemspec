@@ -5,62 +5,25 @@
 
 Gem::Specification.new do |s|
   s.name = %q{coulda}
-  s.version = "0.5.3"
+  s.version = "0.5.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Evan David Light"]
-  s.date = %q{2009-12-08}
+  s.date = %q{20010-03-21}
   s.description = %q{Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse}
   s.email = %q{evan@tiggerpalace.com}
   s.extra_rdoc_files = [
     "LICENSE",
      "README.rdoc"
   ]
-  s.files = [
-     "HISTORY",
-     "LICENSE",
-     "README.rdoc",
-     "Rakefile",
-     "VERSION",
-     "coulda.gemspec",
-     "example/feature_with_pending_scenario.rb",
-     "example/macros_in_a_module.rb",
-     "example/pending_feature.rb",
-     "example/pending_feature_with_purpose.rb",
-     "example/sample.rb",
-     "example/simple_reuse_via_method.rb",
-     "example/simple_scenario.rb",
-     "geminstaller.yml",
-     "lib/coulda.rb",
-     "lib/coulda/feature.rb",
-     "lib/coulda/scenario.rb",
-     "lib/coulda/tasks.rb",
-     "lib/coulda/pending.rb",
-     "lib/coulda/tasks/print_features.rake",
-     "lib/coulda/vendor/constantize.rb",
-     "lib/coulda/vendor/underscore.rb",
-     "lib/coulda/world.rb",
-     "test/feature_test.rb",
-     "test/integration/using_coulda_test.rb",
-     "test/regression/issue_1_test.rb",
-     "test/regression/pending_scenarios_test.rb",
-     "test/scenario_test.rb",
-     "test/test_helper.rb"
-  ]
+  s.files = Dir.glob('lib/**/*.rb') + Dir.glob('*')
+  puts s.files.inspect
   s.homepage = %q{http://evan.tiggerpalace.com/}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse}
-  s.test_files = [
-    "test/feature_test.rb",
-     "test/integration/using_coulda_test.rb",
-     "test/regression/issue_1_test.rb",
-     "test/regression/pending_scenarios_test.rb",
-     "test/scenario_test.rb",
-     "test/test_helper.rb"
-  ]
-  s.add_dependency 'pending', '>= 0.1.1'
+  s.test_files = Dir.glob('test/**')
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION

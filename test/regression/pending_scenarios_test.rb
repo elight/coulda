@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), "..", "test_helper")
+require 'test_helper'
 require 'rr'
 
 # http://github.com/elight/coulda/issues#issue/1

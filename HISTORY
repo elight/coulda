@@ -83,3 +83,11 @@ Cleanup
 0.5.3
 -----
 - coulda:print_features better indicates which scenarios and which steps are pending
+
+0.5.4
+-----
+- Actually removing dependency from Jeremy McAnally's "pending" from the gemspec (woops)
+
+0.5.5
+-----
+- Adds Coulda#default_testcase_class and mutator to set a single testcase_class instead of Test::Unit::TestCase

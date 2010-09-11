@@ -1,10 +1,23 @@
-require File.join(File.dirname(__FILE__), "test_helper")
+require 'test_helper'
 
 class FeatureTest < Test::Unit::TestCase
 
-  should "be able to subclass any child class of TestCase" do
+  should "be able to specify a default TestCase class to subclass for all Features" do
     MyTestCase = Class.new(Test::Unit::TestCase)
-    feature = Feature "a child class", :testcase_class => MyTestCase
+    Coulda.default_testcase_class = MyTestCase
+    feature = Feature "a child class"
+    assert feature.ancestors.include? MyTestCase
+  end
+
+  should "raise if the default TestCase class is not a Class" do
+    assert_raises Exception do
+      Coulda.default_testcase_class = "ohai"
+    end
+  end
+
+  should "be able to subclass any child class of TestCase" do
+    MyTestCase2 = Class.new(Test::Unit::TestCase)
+    feature = Feature "another child class", :testcase_class => MyTestCase2
     assert feature.ancestors.include? Test::Unit::TestCase
   end
 
