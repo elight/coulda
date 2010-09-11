@@ -21,6 +21,8 @@ Easy as pie.
   require 'coulda'
   include Coulda
 
+  Coulda.default_testcase_class = ActiveSupport::TestCase
+
   Feature "feature name" do
     in_order_to "foo"
     as_a "bar"
