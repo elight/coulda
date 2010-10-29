@@ -17,12 +17,11 @@ Gem::Specification.new do |s|
      "README.rdoc"
   ]
   s.files = Dir.glob('lib/**/*.rb') + Dir.glob('*')
-  puts s.files.inspect
   s.homepage = %q{http://coulda.tiggerpalace.com}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse}
+  s.summary = %q{Test::Unit-based acceptance testing DSL}
   s.test_files = Dir.glob('test/**')
 
   if s.respond_to? :specification_version then
