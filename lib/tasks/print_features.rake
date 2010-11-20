@@ -1,3 +1,5 @@
+require 'rake'
+
 namespace :coulda do
   desc "Print all features as plain text"
   task :print_features do

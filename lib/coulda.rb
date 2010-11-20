@@ -10,6 +10,7 @@ require 'coulda/scenario'
 require 'coulda/pending'
 require 'coulda/vendor/constantize'
 require 'coulda/vendor/underscore'
+require 'coulda/tasks'
 
 module Kernel
   # Factory method for Test::Unit::TestCase subclasses

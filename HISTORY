@@ -91,3 +91,7 @@ Cleanup
 0.5.5
 -----
 - Adds Coulda#default_testcase_class and mutator to set a single testcase_class instead of Test::Unit::TestCase
+
+0.6.1
+-----
+- Requiring coulda automatcally loads coulda/tasks.  No longer need to require 'coulda/tasks' to get the Rake task in your Rails app.
