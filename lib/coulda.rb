@@ -18,10 +18,7 @@ module Coulda
 
   # Factory method for Test::Unit::TestCase subclasses
   def Feature(name, opts = {}, &block)
-    unless @processed_cmd_line_args
-      @processed_cmd_line_args = true
-      process_command_line_tags
-    end
+    process_command_line_tags
 
     if @requested_tags && !@requested_tags.empty?
       if @feature_tags.nil? || !@feature_tags.any? { |f_tag| @requested_tags.include? f_tag}
@@ -63,8 +60,11 @@ module Coulda
   end
 
   def process_command_line_tags
-    tags = ARGV.inject([]) { |m, a| m << a if a =~ /^tags=/; m }
-    @requested_tags = tags.map { |t| t.split("=")[1].split(",") }.flatten
+    unless @processed_cmd_line_args
+      @processed_cmd_line_args = true
+      tags = ARGV.inject([]) { |m, a| m << a if a =~ /^tags=/; m }
+      @requested_tags = tags.map { |t| t.split("=")[1].split(",") }.flatten
+    end
   end
 end
 
