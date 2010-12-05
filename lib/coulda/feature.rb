@@ -43,6 +43,9 @@ module Test
         HERE
       end
 
+      def Tag(name)
+      end
+
       # Creates a Scenario instance and adds it to the Feature
       def self.Scenario(scenario_name, &block)
         @scenarios ||=[]
