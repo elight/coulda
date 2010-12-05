@@ -27,7 +27,7 @@ module Coulda
             if stmt[:block]
               raise Exception.new "Passing a block to a method called-by-name is currently unhandle"
             else
-              self.__send__(stmt[:method])
+              self.class.__send__(stmt[:method])
             end
           elsif stmt[:block]
             self.instance_eval &(stmt[:block])

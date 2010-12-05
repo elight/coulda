@@ -95,3 +95,9 @@ Cleanup
 0.6.1
 -----
 - Requiring coulda automatcally loads coulda/tasks.  No longer need to require 'coulda/tasks' to get the Rake task in your Rails app.
+
+0.6.2
+-----
+- Updated call method by name to use class methods so that they, and "macros", may universally be imported via 'extends SomeModule'
+
+
