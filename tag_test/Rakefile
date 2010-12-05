@@ -5,9 +5,11 @@ require 'rake/testtask'
 gem 'shoulda'
 require 'shoulda'
 
+require '../lib/coulda/tasks'
+
 # Test::Unit::UI::VERBOSE
 Rake::TestTask.new('test') do |t|
-  t.libs << 'test'
+  t.libs << 'test' 
   t.pattern = 'test/**/*_test.rb'
   t.verbose = true
 end
