@@ -57,4 +57,4 @@ Thanks to
 ---------
 * David Chelimsky and Jim Weirich for turning me into the test-obsessed developer that I am.
 * Timothy King for putting up with my scotch-powered rambling while working on v0.4.0
-* We Are Titans (http://www.wearetitans.net/) for sponsoring v0.4.0 on up
+* We Are Titans (http://www.wearetitans.net/) for sponsoring v0.4.0 through 0.5.5
