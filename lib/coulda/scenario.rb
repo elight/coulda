@@ -32,7 +32,7 @@ module Coulda
           elsif stmt[:block]
             self.instance_eval &(stmt[:block])
           else
-            pending self.class.current_scenario, stmt
+            coulda_pending "#{stmt[:file]}:#{stmt[:line]}: Scenario '#{scenario.name}': #{stmt[:type]} '#{stmt[:text]}'"
             break
           end
         end

@@ -6,15 +6,15 @@ module Test
 
       # Loosely based upon Jeremy McAnally's pending
       
-      def pending(scenario, statement)
-        @@pending_cases << [scenario, statement]
+      def coulda_pending(txt)
         print "P"
+        @@pending_cases << txt
         
         @@at_exit ||= begin
           at_exit do
             puts "\nPending Cases:"
-            @@pending_cases.each do |scenario, stmt|
-              puts "#{stmt[:file]}:#{stmt[:line]}: Scenario '#{scenario.name}': #{stmt[:type]} '#{stmt[:text]}'"
+            @@pending_cases.each do |msg|
+              puts msg
             end
           end
         end
