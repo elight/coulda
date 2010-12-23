@@ -17,11 +17,3 @@ def run_feature(feature)
   end
   result
 end
-
-def pendings_are_errors
-  Feature.class_eval do
-    def pending(*args)
-      raise Exception.new
-    end
-  end
-end
