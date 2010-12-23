@@ -100,4 +100,7 @@ Cleanup
 -----
 - Updated call method by name to use class methods so that they, and "macros", may universally be imported via 'extends SomeModule'
 
-
+0.6.3
+-----
+- Renamed #pending to #coulda_pending to avoid conflicts with Rails 3
+- Failing test in this release as I stupidly began working on some new features in the master branch.  Don't use the new features (they're not documented outside of the new tests) and you'll be fine. ;-)
