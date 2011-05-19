@@ -44,8 +44,4 @@ Feature "Using Coulda", :testcase_class => Test::Unit::TestCase do
     Then "something else" do; end
     And "should pass" do; end
   end
-
-  Scenario "A scenario that invokes a method by name" do
-    When :some_method
-  end
 end

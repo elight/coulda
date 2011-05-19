@@ -9,32 +9,40 @@ namespace :coulda do
     require 'test/unit'
 
     # bug in test unit.  Set to true to stop from running.
-    Test::Unit.run = true
+    unless RUBY_VERSION =~ /^1.9/
+      Test::Unit.run = true
+    end
 
-    require 'coulda'
 
     test_files = Dir.glob(File.join('test', '**', '*_test.rb'))
     test_files.each do |file|
       load file
     end
 
-    Coulda::World.features.each do |feature, name|
+    Coulda::World.features.each do |name, sexps|
       puts "Feature: #{name}"
-      puts "  In order to #{feature.in_order_to}" if feature.in_order_to
-      puts "  As a #{feature.as_a}" if feature.as_a
-      puts "  I want to #{feature.i_want_to}" if feature.i_want_to
-      feature.scenarios.each do |scenario|
-        puts
-        print "  "
-        print "(**PENDING**) " if scenario.pending?
-        puts "Scenario: #{scenario.name}"
-        scenario.statements.each do |stmt|
-          print "    "
-          print "(**PENDING**) " unless stmt[:block]
-          puts "#{stmt[:type].to_s} #{stmt[:text]}"
+      sexps.each do |sexp|
+        next if sexp.is_a? String
+        case sexp[1]
+        when :in_order_to
+          puts "  In order to #{sexp[1]}"
+        when :as_a
+          puts "  As a #{sexp[1]}"
+        when :i_want_to 
+          puts "  I want to #{sexp[1]}"
+        when :Scenario
+          puts
+          print "  "
+          print "(**PENDING**) " if sexp.length < 4 || sexp[3].any? { |s| s.length < 4 }
+          puts "Scenario: #{sexp[2]}"
+          sexp[3].each do |step|
+            print "    "
+            print "(**PENDING**) " unless step.length == 4
+            puts "#{step[1]} #{step[2]}"
+          end
+          puts
         end
       end
-      puts
     end
   end
 end

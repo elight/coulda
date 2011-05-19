@@ -2,6 +2,9 @@ require 'rubygems'
 require 'rake'
 require 'rake/testtask'
 
+require File.join(File.dirname(__FILE__), 'lib', 'coulda', 'tasks')
+
+
 gem 'shoulda'
 require 'shoulda'
 

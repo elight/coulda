@@ -1,40 +1,33 @@
 require 'test/unit'
+require 'lispy'
 
 require File.join(File.dirname(__FILE__), 'coulda', 'world')
-require File.join(File.dirname(__FILE__), 'coulda', 'feature')
-require File.join(File.dirname(__FILE__), 'coulda', 'scenario')
 require File.join(File.dirname(__FILE__), 'coulda', 'pending')
 require File.join(File.dirname(__FILE__), 'coulda', 'vendor', 'constantize')
 require File.join(File.dirname(__FILE__), 'coulda', 'vendor', 'underscore')
 require File.join(File.dirname(__FILE__), 'coulda', 'tasks')
 
 module Coulda
-  SyntaxError = Class.new(StandardError)
+  PROC_KEYWORDS = [:Given, :When, :Then, :And]
+  KEYWORDS = [:Scenario, :Tag, :in_order_to, :as_a, :i_want_to] + PROC_KEYWORDS
 
-  def Tag(name)
-    @feature_tags ||= []
-    @feature_tags << name.to_s
-  end
+  SyntaxError = Class.new(StandardError)
 
   # Factory method for Test::Unit::TestCase subclasses
   def Feature(name, opts = {}, &block)
-    process_command_line_tags
-
-    if @requested_tags && !@requested_tags.empty?
-      if @feature_tags.nil? || !@feature_tags.any? { |f_tag| @requested_tags.include? f_tag}
-        @feature_tags = nil 
-        return
-      end
-    end
-    @feature_tags = nil
-
     test_class = Class.new(opts[:testcase_class] || Coulda.default_testcase_class || Test::Unit::TestCase)
-    World.register_feature(test_class, name)
 
-    Coulda::assign_class_to_const test_class, name
+    assign_class_to_const test_class, name
+    test_class.send(:extend, Lispy)
+    test_class.instance_eval do
+      extend Lispy
+      acts_lispy :only => Coulda::KEYWORDS, :retain_blocks_for => Coulda::PROC_KEYWORDS
+    end
     test_class.class_eval &block if block_given?
-    test_class.assert_presence_of_intent
 
+    World.register_feature(name, test_class.output)
+
+    generate_test_methods_from test_class
 
     test_class
   end
@@ -50,6 +43,8 @@ module Coulda
     @class
   end
 
+  private
+
   def assign_class_to_const(test_class, potential_const)
     base_name = potential_const
     if potential_const !~ /^[a-zA-Z]/
@@ -59,11 +54,25 @@ module Coulda
     Object.const_set(titleized_underscored_name, test_class)
   end
 
-  def process_command_line_tags
-    unless @processed_cmd_line_args
-      @processed_cmd_line_args = true
-      tags = ARGV.inject([]) { |m, a| m << a if a =~ /^tags=/; m }
-      @requested_tags = tags.map { |t| t.split("=")[1].split(",") }.flatten
+  def generate_test_methods_from(test_class)
+    file_name = test_class.output.first
+    test_class.output.each do |sexp|
+      next if sexp.is_a? String
+      next unless sexp[1] == :Scenario
+
+      test_class.send(:define_method,"test_#{sexp[2].downcase.super_custom_underscore}") do
+        if sexp.length == 3
+          coulda_pending "Scenario '#{sexp[2]}' in #{file_name}:#{sexp[0]}"
+        else 
+          sexp[3].each do |step_sexp|
+            if step_sexp.length == 3
+              coulda_pending "Scenario '#{sexp[2]}': #{step_sexp[1]} '#{step_sexp[2]} in #{file_name}:#{step_sexp[0]}"
+            else
+              instance_eval &step_sexp[3]
+            end
+          end
+        end
+      end
     end
   end
 end
