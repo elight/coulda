@@ -104,3 +104,7 @@ Cleanup
 -----
 - Renamed #pending to #coulda_pending to avoid conflicts with Rails 3
 - Failing test in this release as I stupidly began working on some new features in the master branch.  Don't use the new features (they're not documented outside of the new tests) and you'll be fine. ;-)
+
+0.7.0
+-----
+- Significant refactoring using my branch of lispy (https://github.com/elight/lispy)

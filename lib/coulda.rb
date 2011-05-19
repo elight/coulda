@@ -78,5 +78,3 @@ module Coulda
 end
 
 include ::Coulda
-
-
