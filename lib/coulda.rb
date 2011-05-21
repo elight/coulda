@@ -18,7 +18,6 @@ module Coulda
     test_class = Class.new(opts[:testcase_class] || Coulda.default_testcase_class || Test::Unit::TestCase)
 
     assign_class_to_const test_class, name
-    test_class.send(:extend, Lispy)
     test_class.instance_eval do
       extend Lispy
       acts_lispy :only => Coulda::KEYWORDS, :retain_blocks_for => Coulda::PROC_KEYWORDS
