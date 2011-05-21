@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Test::Unit-based acceptance testing DSL}
   s.test_files = Dir.glob('test/**')
 
-  s.add_dependency('lispy', '>= 0.1.3')
+  s.add_dependency('lispy', '>= 0.1.2')
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
