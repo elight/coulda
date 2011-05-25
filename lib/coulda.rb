@@ -54,20 +54,20 @@ module Coulda
   end
 
   def generate_test_methods_from(test_class)
-    file_name = test_class.output.first
-    test_class.output.each do |sexp|
-      next if sexp.is_a? String
-      next unless sexp[1] == :Scenario
+    file_name = test_class.output.file
+    return unless test_class.output && test_class.output.expressions
+    test_class.output.expressions.each do |sexp|
+      next unless sexp.symbol == :Scenario
 
-      test_class.send(:define_method,"test_#{sexp[2].downcase.super_custom_underscore}") do
-        if sexp.length == 3
-          coulda_pending "Scenario '#{sexp[2]}' in #{file_name}:#{sexp[0]}"
-        else 
-          sexp[3].each do |step_sexp|
-            if step_sexp.length == 3
-              coulda_pending "Scenario '#{sexp[2]}': #{step_sexp[1]} '#{step_sexp[2]} in #{file_name}:#{step_sexp[0]}"
+      test_class.send(:define_method,"test_#{sexp.args.downcase.super_custom_underscore}") do
+        if sexp.scope.nil?
+          coulda_pending "Scenario '#{sexp.args}' in #{file_name}:#{sexp.lineno}"
+        else
+          sexp.scope.expressions.each do |step_sexp|
+            if step_sexp.proc.nil?
+              coulda_pending "Scenario '#{sexp.args}': #{step_sexp.symbol} '#{step_sexp.args} in #{file_name}:#{step_sexp.lineno}"
             else
-              instance_eval &step_sexp[3]
+              instance_eval &step_sexp.proc
             end
           end
         end
