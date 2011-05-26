@@ -54,23 +54,36 @@ module Coulda
   end
 
   def generate_test_methods_from(test_class)
-    file_name = test_class.output.file
     return unless test_class.output && test_class.output.expressions
+
     test_class.output.expressions.each do |sexp|
       next unless sexp.symbol == :Scenario
+      generate_test_method :for_scenario => sexp, :in_class => test_class
+    end
+  end
 
-      test_class.send(:define_method,"test_#{sexp.args.downcase.super_custom_underscore}") do
-        if sexp.scope.nil?
-          coulda_pending "Scenario '#{sexp.args}' in #{file_name}:#{sexp.lineno}"
-        else
-          sexp.scope.expressions.each do |step_sexp|
-            if step_sexp.proc.nil?
-              coulda_pending "Scenario '#{sexp.args}': #{step_sexp.symbol} '#{step_sexp.args} in #{file_name}:#{step_sexp.lineno}"
-            else
-              instance_eval &step_sexp.proc
-            end
-          end
-        end
+  def generate_test_method(args = {})
+    scenario, test_class = args[:for_scenario], args[:in_class]
+    file_name = test_class.output.file
+
+    test_class.send(:define_method,"test_#{scenario.args.downcase.super_custom_underscore}") do
+      if scenario.scope.nil?
+        coulda_pending "Scenario '#{scenario.args}' in #{file_name}:#{scenario.lineno}"
+      else
+        execute_test_steps :for_scenario => scenario, :in_class => test_class
+      end
+    end
+  end
+
+  def execute_test_steps(args = {})
+    scenario, test_class = args[:for_scenario], args[:in_class]
+    file_name = test_class.output.file
+
+    scenario.scope.expressions.each do |step_sexp|
+      if step_sexp.proc.nil?
+        coulda_pending "Scenario '#{scenario.args}': #{step_sexp.symbol} '#{step_sexp.args} in #{file_name}:#{step_sexp.lineno}"
+      else
+        instance_eval &step_sexp.proc
       end
     end
   end
