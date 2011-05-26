@@ -19,26 +19,25 @@ namespace :coulda do
       load file
     end
 
-    Coulda::World.features.each do |name, sexps|
+    Coulda::World.features.each do |name, output|
       puts "Feature: #{name}"
-      sexps.each do |sexp|
-        next if sexp.is_a? String
-        case sexp[1]
+      output.expressions.each do |sexp|
+        case sexp.symbol
         when :in_order_to
-          puts "  In order to #{sexp[1]}"
+          puts "  In order to #{sexp.args}"
         when :as_a
-          puts "  As a #{sexp[1]}"
-        when :i_want_to 
-          puts "  I want to #{sexp[1]}"
+          puts "  As a #{sexp.args}"
+        when :i_want_to
+          puts "  I want to #{sexp.args}"
         when :Scenario
           puts
           print "  "
-          print "(**PENDING**) " if sexp.length < 4 || sexp[3].any? { |s| s.length < 4 }
-          puts "Scenario: #{sexp[2]}"
-          sexp[3].each do |step|
+          print "(**PENDING**) " if sexp.scope.nil? || sexp.scope.expressions.any? { |step| step.proc.nil? }
+          puts "Scenario: #{sexp.args}"
+          sexp.scope.expressions.each do |step|
             print "    "
-            print "(**PENDING**) " unless step.length == 4
-            puts "#{step[1]} #{step[2]}"
+            print "(**PENDING**) " unless step.proc
+            puts "#{step.symbol} #{step.args}"
           end
           puts
         end
