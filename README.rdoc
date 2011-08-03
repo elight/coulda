@@ -17,41 +17,50 @@ See http://coulda.tiggerpalace.com for more information.
 
 Easy as pie.
 
-  require 'rubygems'
-  require 'coulda'
-  include Coulda
+``` ruby
+require 'rubygems'
+require 'coulda'
 
-  Coulda.default_testcase_class = ActiveSupport::TestCase
+include Coulda
 
-  Feature "feature name" do
-    in_order_to "foo"
-    as_a "bar"
-    i_want_to "blech"
+Coulda.default_testcase_class = ActiveSupport::TestCase
 
-    def something
-    end
+Feature "feature name" do
+  in_order_to "foo"
+  as_a "bar"
+  i_want_to "blech"
 
-    def expectation
-    end
-
-    Scenario "pending scenario"
-
-    Scenario "another scenario" do
-      Given "a pending prereq"
-      When "something happens" do
-        something
-      end
-      Then "expect something else" do
-        expectation
-      end
-    end
-
-    Scenario "that is live" do
-      Given "foo" do; end
-      When "bar" do; end
-      Then "blech" do; end
-    end
+  def something
+    # some stuff here
   end
+
+  def expectation
+    # some stuff here too
+  end
+
+  Scenario "a scenario you haven't written"
+
+  Scenario "another scenario" do
+
+    Given "a pending prerequisite"
+
+    When "something happens" do
+      something
+    end
+
+    Then "expect something else" do
+      expectation
+    end
+
+  end
+
+  Scenario "that is live" do
+    Given "foo"  {}
+    When "bar"   {}
+    Then "blech" {}
+  end
+end
+```
 
 Thanks to
 ---------
