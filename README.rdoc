@@ -28,10 +28,7 @@ Easy as pie.
     as_a "bar"
     i_want_to "blech"
 
-    def something
-    end
-
-    def expectation
+    def given_something
     end
 
     Scenario "pending scenario"
@@ -39,15 +36,15 @@ Easy as pie.
     Scenario "another scenario" do
       Given "a pending prereq"
       When "something happens" do
-        something
+        # an event here
       end
       Then "expect something else" do
-        expectation
+        # assert something here
       end
     end
 
     Scenario "that is live" do
-      Given "foo" do; end
+      given_something
       When "bar" do; end
       Then "blech" do; end
     end
