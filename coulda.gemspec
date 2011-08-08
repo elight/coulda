@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{coulda}
-  s.version = "0.7.0"
+  s.version = "0.7.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Evan David Light"]
-  s.date = %q{2011-05-19}
+  s.date = %q{2011-08-08}
   s.description = %q{Behaviour Driven Development derived from Cucumber but as an internal DSL with methods for reuse}
-  s.email = %q{evan@tiggerpalace.com}
+  s.email = %q{evan@tripledogdare.net}
   s.extra_rdoc_files = [
     "LICENSE",
     "README.rdoc"
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Test::Unit-based acceptance testing DSL}
   s.test_files = Dir.glob('test/**')
 
-  s.add_dependency('lispy', '>= 0.1.2')
+  s.add_dependency('yourdsl', '~> 0.7')
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION

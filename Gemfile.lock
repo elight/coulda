@@ -3,6 +3,7 @@ GEM
   specs:
     rr (1.0.2)
     shoulda (2.11.3)
+    yourdsl (0.7.1)
 
 PLATFORMS
   ruby
@@ -10,3 +11,4 @@ PLATFORMS
 DEPENDENCIES
   rr
   shoulda
+  yourdsl (~> 0.7)

@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'lispy'
+require 'yourdsl'
 
 require File.join(File.dirname(__FILE__), 'coulda', 'world')
 require File.join(File.dirname(__FILE__), 'coulda', 'pending')
@@ -19,10 +19,10 @@ module Coulda
 
     assign_class_to_const test_class, name
     test_class.instance_eval do
-      extend Lispy
-      acts_lispy :only => Coulda::KEYWORDS, :retain_blocks_for => Coulda::PROC_KEYWORDS
+      extend YourDSL
+      record_your_dsl :only => Coulda::KEYWORDS, :retain_blocks_for => Coulda::PROC_KEYWORDS
     end
-    test_class.class_eval &block if block_given?
+    test_class.instance_eval &block if block_given?
 
     World.register_feature(name, test_class.output)
 

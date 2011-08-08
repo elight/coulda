@@ -9,11 +9,7 @@ Feature "Using Coulda", :testcase_class => Test::Unit::TestCase do
   as_a "developer"
   i_want_to "have typical Coulda usage work"
 
-  def self.some_method; end
-
-  def prove_methods_from_then_invokes_method_on_feature
-    assert true
-  end
+  def given_something; end
 
   Scenario "A pending scenario with a Given/When/Then without a block" do
     Given "this scenario which should be pending" do
@@ -23,17 +19,10 @@ Feature "Using Coulda", :testcase_class => Test::Unit::TestCase do
     Then "should not error/fail because it is pending" do; end
   end
 
-  Scenario "A scenario without a When" do
-    Given "a scenario calling a Feature instance method" do; end
+  Scenario "A live scenario with a call to a class method" do
+    given_something
     Then "should pass if the method does not fail/error" do
-      prove_methods_from_then_invokes_method_on_feature
     end
-  end
-
-  Scenario "that is live" do
-    Given "no prerequisites" do; end
-    When "no events" do; end
-    Then "should pass" do; end
   end
 
   Scenario "A scenario with a lot of Ands" do
