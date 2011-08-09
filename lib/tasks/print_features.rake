@@ -4,7 +4,7 @@ require 'coulda'
 
 namespace :coulda do
   def scenario_pending?(sexp)
-    sexp.scope.nil? || sexp.scope.expressions.none? { |step| step.proc }
+    sexp.scope.nil? || sexp.scope.expressions.any? { |step| step.proc.nil? }
   end
 
   desc "Print all features as plain text"
