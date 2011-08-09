@@ -1,6 +1,12 @@
 require 'rake'
+$LOAD_PATH << "lib"
+require 'coulda'
 
 namespace :coulda do
+  def scenario_pending?(sexp)
+    sexp.scope.nil? || sexp.scope.expressions.none? { |step| step.proc }
+  end
+
   desc "Print all features as plain text"
   task :print_features do
 
@@ -32,7 +38,7 @@ namespace :coulda do
         when :Scenario
           puts
           print "  "
-          print "(**PENDING**) " if sexp.scope.nil? || sexp.scope.expressions.any? { |step| step.proc.nil? }
+          print "(**PENDING**) " if scenario_pending?(sexp)
           puts "Scenario: #{sexp.args}"
           sexp.scope.expressions.each do |step|
             print "    "
